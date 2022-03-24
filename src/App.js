@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import JunkContent from './views/JunkContent';
 import HeaderBar from './views/HeaderBar';
-import FooterBar from './views/FooterBar';
+import FooterBar from './views/FooterBar/FooterBar';
 
 function App() {
   return (
