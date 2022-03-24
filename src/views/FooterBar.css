@@ -1,0 +1,13 @@
+.footerFixedElement {
+    background-color: #2d313a;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    height:40px;
+    z-index:100;
+    box-shadow: 0 1px 5px #000;
+    font-family: Montserrat,sans-serif;
+    font-size: 3vw;
+    justify-content: center;
+    padding-bottom: 15px;
+}
