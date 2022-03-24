@@ -1,0 +1,13 @@
+.fixedElement {
+    background-color: #39445a;;
+    position:fixed;
+    top:0;
+    width:100%;
+    height:75px;
+    z-index:100;
+    box-shadow: 0 1px 5px #000;
+    font-family: Montserrat,sans-serif;
+    font-size: 5vw;
+    justify-content: center;
+    padding-bottom: 15px;
+}
