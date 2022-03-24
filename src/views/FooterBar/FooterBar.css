@@ -12,3 +12,10 @@
     padding-bottom: 5px;
     padding-top:5px;
 }
+
+.button-container {
+    display: flex;
+    width: 400px;
+    margin: 0 auto;
+    justify-content: space-evenly;
+}
