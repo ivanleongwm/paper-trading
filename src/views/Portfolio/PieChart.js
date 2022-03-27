@@ -21,18 +21,17 @@ const data02 = [
 
 export default function App() {
     return (
-      <PieChart width={400} height={400}>
+      <PieChart width={600} height={600}>
           <Pie
             dataKey="value"
-            isAnimationActive={false}
+            isAnimationActive={true}
             data={data01}
             cx="50%"
             cy="50%"
-            outerRadius={80}
+            outerRadius={200}
             fill="#8884d8"
             label
           />
-          <Pie dataKey="value" data={data02} cx={500} cy={200} innerRadius={40} outerRadius={80} fill="#82ca9d" />
           <Tooltip />
       </PieChart>
     );
