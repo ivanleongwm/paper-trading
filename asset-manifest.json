@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/ivanleongwm/paper-trading/static/css/main.03044fd8.css",
+    "main.js": "/ivanleongwm/paper-trading/static/js/main.78b66882.js",
+    "static/js/787.6998f112.chunk.js": "/ivanleongwm/paper-trading/static/js/787.6998f112.chunk.js",
+    "static/media/portfolio.png": "/ivanleongwm/paper-trading/static/media/portfolio.49ba2592773259239d63.png",
+    "static/media/buy.png": "/ivanleongwm/paper-trading/static/media/buy.8f6622a33a48c698cc62.png",
+    "static/media/sell.png": "/ivanleongwm/paper-trading/static/media/sell.7d33c1eeaa5d3d1b3299.png",
+    "index.html": "/ivanleongwm/paper-trading/index.html",
+    "main.03044fd8.css.map": "/ivanleongwm/paper-trading/static/css/main.03044fd8.css.map",
+    "main.78b66882.js.map": "/ivanleongwm/paper-trading/static/js/main.78b66882.js.map",
+    "787.6998f112.chunk.js.map": "/ivanleongwm/paper-trading/static/js/787.6998f112.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.03044fd8.css",
+    "static/js/main.78b66882.js"
+  ]
+}
