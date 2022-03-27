@@ -1,18 +1,12 @@
-/* Remove browser defaults */
-* {
-box-sizing: border-box;
-padding: 0;
-margin: 0;
-}
 
 
 /* Tab Container */
 .Tabs {
-width: 80%;
+width: 55%;
 height: auto;
 min-height: 400px;
 background: #053742;
-margin: 3.5rem auto 1.5rem;
+margin: 1.7rem 1rem 1.5rem 0rem;
 padding: 2rem 1rem;
 color: #E8F0F2;
 border-radius: 2rem;
