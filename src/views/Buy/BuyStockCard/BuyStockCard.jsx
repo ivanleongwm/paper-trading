@@ -7,7 +7,7 @@ export default function BuyStockCard ({stockHistoricalPrices}) {
             <div>{stockHistoricalPrices.name}</div>
             <div>{stockHistoricalPrices.price}</div>
             <div>{stockHistoricalPrices.twentyFourHourChange}</div>
-            <div>
+            <div className="mini-chart-container">
                 <MiniChart historicalPrices={stockHistoricalPrices.historical}/>
             </div>
         </div>
