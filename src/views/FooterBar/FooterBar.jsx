@@ -8,14 +8,17 @@ const buttons = [
     {
         name: 'Portfolio',
         icon: portfolio,
+        link: '/',
     },
     {
         name: 'Buy',
-        icon: buy
+        icon: buy,
+        link: '/buy'
     },
     {
         name: 'Sell',
-        icon: sell
+        icon: sell,
+        link: '/sell'
     }
 ]
 
