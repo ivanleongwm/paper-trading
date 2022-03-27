@@ -1,6 +1,7 @@
 import TopSpacer from "./TopSpacer";
 import LineChart from "./LineChart";
 import PieChart from "./PieChart";
+import Tabs from './Tabs/Tabs'
 import './Portfolio.css'
 
 export default function Portfolio() {
@@ -9,9 +10,8 @@ export default function Portfolio() {
             <TopSpacer/>
             <div className="chart-container">
                 <PieChart />
-                <LineChart />
+                <Tabs />
             </div>
         </div>
     )
 }
-//<MixedChart />
