@@ -1,4 +1,4 @@
-let historicalStockData = {
+export default {
     'AAPL' : {
         'name': 'Apple',
         'price': 174.72,
@@ -377,5 +377,3 @@ let historicalStockData = {
     }
 
 }
-
-module.exports(historicalStockData)
