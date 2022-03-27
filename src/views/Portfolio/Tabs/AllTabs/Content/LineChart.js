@@ -1,6 +1,6 @@
 import React from "react";
-import "./styles.css";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import './LineChart.css'
 
 const data = [
   {
@@ -49,8 +49,8 @@ const data = [
 
 export default function App() {
     return (
-      <LineChart width={800} height={500} data={data}
-        margin={{ top: 100, right: 40, left: 20, bottom: 5 }}>
+      <LineChart width={800} height={400} data={data}
+        margin={{ top: 10, right: 40, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />

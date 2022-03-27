@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import TabNavItem from "./AllTabs/TabNavItem";
 import TabContent from "./AllTabs/TabContent";
 import './Tabs.css'
+//import tabs content
+import FirstTabLineChart from './AllTabs/Content/LineChart'
+
  
 export default function Tabs() {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -16,7 +19,7 @@ export default function Tabs() {
  
       <div className="outlet">
         <TabContent id="tab1" activeTab={activeTab}>
-          <p>Tab 1 works!</p>
+          <FirstTabLineChart/>
         </TabContent>
         <TabContent id="tab2" activeTab={activeTab}>
           <p>Tab 2 works!</p>
