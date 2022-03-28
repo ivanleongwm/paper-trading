@@ -1,4 +1,4 @@
-export default {
+let stockHistoricalPrices = {
     'AAPL' : {
         'name': 'Apple',
         'price': 174.72,
@@ -1536,3 +1536,5 @@ export default {
     }
 
 }
+
+export default stockHistoricalPrices;
