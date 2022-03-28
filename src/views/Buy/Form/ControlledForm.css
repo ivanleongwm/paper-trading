@@ -1,0 +1,8 @@
+.form-container {
+    justify-content: space-evenly;
+    display:flex;
+}
+
+.input-quantity {
+    width: 50px;
+}

@@ -40,7 +40,7 @@ const Candlestick = props => {
   const isGrowing = open < close;
   const color = isGrowing ? 'green' : 'red';
   const ratio = Math.abs(height / (open - close));
-  console.log(props);
+  //console.log(props);
   return (
     <g stroke={color} fill="none" strokeWidth="2">
       <path
@@ -99,7 +99,7 @@ const prepareData = data => {
 
 const CustomShapeBarChart = ({historicalPrices}) => {
   const data = prepareData(historicalPrices);
-  data.reduce((acc, item) => console.log(item), 0);
+  //data.reduce((acc, item) => console.log(item), 0);
   const minValue = data.reduce(
     (minValue, { low, openClose: [open, close] }) => {
       const currentMin = Math.min(low, open, close);
@@ -115,8 +115,8 @@ const CustomShapeBarChart = ({historicalPrices}) => {
     minValue,
   );
 
-  console.log(data);
-  console.log(minValue, maxValue);
+  //console.log(data);
+  //console.log(minValue, maxValue);
 
   return (
     <BarChart
