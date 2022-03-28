@@ -36,7 +36,7 @@ function Form(props) {
           />
         </label>
       </form>
-      <div>Price: {formData.price}</div>
+      <div>Price: {(formData.price * props.historicalPrices.price).toLocaleString('en', {useGrouping:true})}</div>
     </div>
   );
 }

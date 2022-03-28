@@ -27,7 +27,7 @@ export default function BuyStockCard ({stockHistoricalPrices}) {
             <div className="mini-chart-container">
                 <MiniChart historicalPrices={stockHistoricalPrices.historical}/>
             </div>
-            <Form handleSubmit={handleSubmit} />
+            <Form handleSubmit={handleSubmit} historicalPrices={stockHistoricalPrices}/>
         </div>
     )
 }
