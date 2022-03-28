@@ -1,6 +1,11 @@
+.text-content {
+    padding-top: 50px;
+}
+
 .card-container {
     display:flex;
     justify-content: space-evenly;
+    text-align:center;
 }
 
 .mini-chart-container {

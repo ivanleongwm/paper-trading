@@ -1,3 +1,5 @@
+// reimplement with this candle chart: http://rrag.github.io/react-stockcharts/documentation.html#/candlestick_chart
+
 import React from 'react';
 import {
   BarChart,
@@ -9,6 +11,7 @@ import {
   Legend,
   Cell,
 } from 'recharts';
+import './MiniChart.css'
 
 const colors = [
   '#1f77b4',
@@ -117,10 +120,10 @@ const CustomShapeBarChart = ({historicalPrices}) => {
 
   return (
     <BarChart
-      width={600}
-      height={300}
+      width={500}
+      height={150}
       data={data}
-      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+      margin={{ top: 20, right: 30, left: 20, bottom: 0 }}
     >
       <XAxis dataKey="ts" />
       <YAxis domain={[minValue, maxValue]} />
