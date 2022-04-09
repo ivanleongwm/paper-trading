@@ -12,7 +12,8 @@ export default function FormDataDisplay () {
             .then((data) => {
                 setUserData(data)
                 console.log(data)
-            });
+            })
+            .catch(error => console.log(error))
     },[]);
 
     console.log(userData)
@@ -24,9 +25,16 @@ export default function FormDataDisplay () {
             <div>
                 Display Data
             </div>
-            <div>Username: {userData[0].username}</div>
-            <div>Email: {userData[0].email}</div>
-            <div>Password: {userData[0].password}</div>
+            {
+                userData[0] === undefined ?
+                <div>Nothing</div>
+                :
+                <>
+                    <div>Username: {userData[0].username}</div>
+                    <div>Email: {userData[0].email}</div>
+                    <div>Password: {userData[0].password}</div>
+                </>
+            }
         </>
     )
 }
