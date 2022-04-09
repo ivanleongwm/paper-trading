@@ -7,7 +7,7 @@ export default function FormDataDisplay () {
     const [userData, setUserData] = useState([]);
 
     useEffect(()=> {
-        fetch(urlcat(BACKEND, "/api/Users/"))
+        fetch(urlcat(BACKEND, "/api/users/"))
             .then((response) => response.json())
             .then((data) => setUserData(data));
     },[]);
