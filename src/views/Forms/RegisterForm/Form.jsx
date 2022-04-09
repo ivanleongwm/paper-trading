@@ -7,7 +7,7 @@ const url = urlcat(BACKEND, "/register");
 function Register() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] =  useState("");
+  const [password, setPassword] = useState("");
   // const [cfmPassword, setCfmPassword] =  useState("")
 
   const registerAccount = (register) => {
@@ -20,24 +20,55 @@ function Register() {
     })
       .then((response) => response.json())
       .then((data) => {
-          if (data.error) {
-              setError(data.error)
-          }
-      }).catch(error => console.log(error) );
+        if (data.error) {
+          setError(data.error);
+        }
+      })
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const register = { username, email, password }
-    createHoliday(register)
+    const register = { username, email, password };
+    registerAccount(register);
   };
 
-
-    return (
-      <body>
-        <h1>Welcome to Paper Trading</h1>
-
-        <form action="/register" method="POST">
+  return (
+    <body>
+      <h1>Welcome to Paper Trading</h1>
+      return (
+      <>
+        <form onSubmit={handleSubmit}>
+          Username:
+          <input
+            type="text"
+            name="username"
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <br />
+          Email:
+          <input
+            type="text"
+            name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <br />
+          Password:
+          <input
+            type="text"
+            name="email"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <p>{error}</p>
+          <br />
+          <button>Create</button>
+        </form>
+      </>
+      );
+      {/* <form action="/register" method="POST">
             <fieldset>
               <label for="username">Username</label>
               <input id="username" name="username" placeholder="Username" />
@@ -55,9 +86,9 @@ function Register() {
               <input id="cfmPassword" name="cfmPassword" placeholder="Confirm Password" />
             </fieldset>
             <input type="submit" value="Create" />
-          </form>
-        </body>
-    )
+          </form> */}
+    </body>
+  );
 }
 
 export default Register;
