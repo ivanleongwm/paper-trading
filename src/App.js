@@ -3,7 +3,8 @@ import JunkContent from './views/JunkContent';
 import HeaderBar from './views/Header/HeaderBar';
 import FooterBar from './views/FooterBar/FooterBar';
 import Portfolio from './views/Portfolio/Portfolio';
-import RegisterForm from './views/Forms/RegisterForm/Form'
+import RegisterForm from './views/Forms/RegisterForm/RegisterForm'
+import LoginForm from './views/Forms/RegisterForm/RegisterForm'
 import FormDataDisplay from './views/Forms/FormDataDisplay/FormDataDisplay';
 import Buy from './views/Buy/Buy'
 import Sell from './views/Sell/Sell'
@@ -20,6 +21,7 @@ function App() {
             <Route path="/buy" element={<Buy />}/>
             <Route path="/sell" element={<Sell />}/>
             <Route path="/register" element={<RegisterForm/>}/>
+            <Route path="/login" element={<LoginForm/>}/>
             <Route path="/display" element={<FormDataDisplay/>}/>
           </Routes>
           <FooterBar />
