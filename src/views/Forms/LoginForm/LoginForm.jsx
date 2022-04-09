@@ -7,12 +7,11 @@ const url = urlcat(BACKEND, "/api/users");
 function Login() {
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // const [cfmPassword, setCfmPassword] =  useState("")
 
-  const registerAccount = (register) => {
+  const LoginAccount = (register) => {
     fetch(url, {
       method: "GET",
       headers: {
@@ -31,8 +30,8 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const register = { username, password };
-    registerAccount(register);
+    const login = { username, password };
+    LoginAccount(login);
   };
 
   return (
@@ -84,4 +83,4 @@ function Login() {
   );
 }
 
-export default Register;
+export default Login;
