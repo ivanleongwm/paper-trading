@@ -2,7 +2,7 @@ import { useState } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 
-const url = urlcat(BACKEND, "/api/users");
+const url = urlcat(BACKEND, "/api/users/");
 
 function Login() {
   const [error, setError] = useState("");
@@ -13,7 +13,7 @@ function Login() {
 
   const LoginAccount = (register) => {
     fetch(url, {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

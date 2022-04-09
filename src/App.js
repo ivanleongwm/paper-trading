@@ -4,7 +4,7 @@ import HeaderBar from './views/Header/HeaderBar';
 import FooterBar from './views/FooterBar/FooterBar';
 import Portfolio from './views/Portfolio/Portfolio';
 import RegisterForm from './views/Forms/RegisterForm/RegisterForm'
-import LoginForm from './views/Forms/RegisterForm/RegisterForm'
+import LoginForm from './views/Forms/LoginForm/LoginForm'
 import FormDataDisplay from './views/Forms/FormDataDisplay/FormDataDisplay';
 import Buy from './views/Buy/Buy'
 import Sell from './views/Sell/Sell'
