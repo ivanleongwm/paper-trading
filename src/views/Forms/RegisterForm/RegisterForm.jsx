@@ -2,7 +2,7 @@ import { useState } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 
-const url = urlcat(BACKEND, "/api/users");
+const url = urlcat(BACKEND, "/api/users/");
 
 function Register() {
   const [error, setError] = useState("");
