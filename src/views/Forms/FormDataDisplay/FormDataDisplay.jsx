@@ -24,7 +24,9 @@ export default function FormDataDisplay () {
             <div>
                 Display Data
             </div>
-            <div>{userData[0].username}</div>
+            <div>Username: {userData[0].username}</div>
+            <div>Email: {userData[0].email}</div>
+            <div>Password: {userData[0].password}</div>
         </>
     )
 }
