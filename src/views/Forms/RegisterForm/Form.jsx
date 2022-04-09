@@ -2,12 +2,14 @@ import { useState } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 
-const url = urlcat(BACKEND, "/register");
+const url = urlcat(BACKEND, "/api/users");
 
 function Register() {
+  const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   // const [cfmPassword, setCfmPassword] =  useState("")
 
   const registerAccount = (register) => {
@@ -36,7 +38,6 @@ function Register() {
   return (
     <body>
       <h1>Welcome to Paper Trading</h1>
-      return (
       <>
         <form onSubmit={handleSubmit}>
           Username:
@@ -67,7 +68,6 @@ function Register() {
           <button>Create</button>
         </form>
       </>
-      );
       {/* <form action="/register" method="POST">
             <fieldset>
               <label for="username">Username</label>
