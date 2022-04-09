@@ -1,4 +1,38 @@
-export default function RegisterForm () {
+import { useState } from "react";
+import urlcat from "urlcat";
+import { BACKEND } from "../../../utils/utils";
+
+const url = urlcat(BACKEND, "/register");
+
+function Register() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] =  useState("");
+  // const [cfmPassword, setCfmPassword] =  useState("")
+
+  const registerAccount = (register) => {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(register),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+          if (data.error) {
+              setError(data.error)
+          }
+      }).catch(error => console.log(error) );
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const register = { username, email, password }
+    createHoliday(register)
+  };
+
+
     return (
       <body>
         <h1>Welcome to Paper Trading</h1>
@@ -25,3 +59,5 @@ export default function RegisterForm () {
         </body>
     )
 }
+
+export default Register;
