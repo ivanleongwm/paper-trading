@@ -5,6 +5,7 @@ import FooterBar from './views/FooterBar/FooterBar';
 import Portfolio from './views/Portfolio/Portfolio';
 import RegisterForm from './views/Forms/RegisterForm/RegisterForm'
 import LoginForm from './views/Forms/LoginForm/LoginForm'
+import LoginSuccessful from './views/Forms/LoginSuccess/LoginSuccess';
 import FormDataDisplay from './views/Forms/FormDataDisplay/FormDataDisplay';
 import Buy from './views/Buy/Buy'
 import Sell from './views/Sell/Sell'
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Portfolio />}/>
             <Route path="/buy" element={<Buy />}/>
             <Route path="/sell" element={<Sell />}/>
+            <Route path="/loginsuccessful" element={<LoginSuccessful/>}/>
             <Route path="/register" element={<RegisterForm/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/display" element={<FormDataDisplay/>}/>

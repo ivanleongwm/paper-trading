@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
 const url = urlcat(BACKEND, "/api/users/login");
 
@@ -8,8 +9,14 @@ function Login() {
   const [error, setError] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogin, setLogin] = useState("Not Logged In");
+  let navigate = useNavigate();
 
-  // const [cfmPassword, setCfmPassword] =  useState("")
+  const loginIsSuccessful = (dataResponse) => {
+    if (dataResponse == "Valid password") {
+      navigate("/");
+    }
+  }
 
   const LoginAccount = (register) => {
     fetch(url, {
@@ -19,11 +26,12 @@ function Login() {
       },
       body: JSON.stringify(register),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json()
+      })
       .then((data) => {
-        if (data.error) {
-          setError(data.error);
-        }
+        console.log(data)
+        loginIsSuccessful(data.message)
       })
       .catch((error) => console.log(error));
   };
