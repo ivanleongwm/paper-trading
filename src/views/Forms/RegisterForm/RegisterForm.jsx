@@ -15,7 +15,7 @@ function Register() {
   const registerAccount = (register) => {
     fetch(url, {
       method: "POST",
-      credentials: true,
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },

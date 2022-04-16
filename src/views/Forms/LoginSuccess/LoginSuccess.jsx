@@ -6,11 +6,14 @@ import { useNavigate } from "react-router-dom";
 const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
 function LoginSuccessful() {
+  const [secret, setSecret] = useState({
+    user: ""
+  });
 
   const loginSuccessCheck = () => {
     fetch(url, {
       method: "GET",
-      credentials: true,
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
@@ -21,6 +24,7 @@ function LoginSuccessful() {
       })
       .then((data) => {
         console.log(data)
+        setSecret({ ...secret, user: data })
       })
       .catch((error) => console.log(error));
   };
@@ -32,7 +36,7 @@ function LoginSuccessful() {
   return (
     <body>
       <h1>Login Successful</h1>
-      <h1>Login Successful</h1>
+      <h1>Login Successful: { secret.user }</h1>
     </body>
   );
 }
