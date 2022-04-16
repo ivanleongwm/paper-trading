@@ -31,7 +31,7 @@ function LoginSuccessful() {
 
   useEffect(() => {
     loginSuccessCheck()
-  })
+  },[])
 
   return (
     <body>
