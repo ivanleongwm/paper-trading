@@ -10,6 +10,7 @@ function LoginSuccessful() {
   const loginSuccessCheck = () => {
     fetch(url, {
       method: "GET",
+      credentials: true,
       headers: {
         "Content-Type": "application/json",
       },

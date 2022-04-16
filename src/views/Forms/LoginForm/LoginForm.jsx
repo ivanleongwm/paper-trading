@@ -22,6 +22,7 @@ function Login() {
   const LoginAccount = (register) => {
     fetch(url, {
       method: "POST",
+      credentials: true,
       headers: {
         "Content-Type": "application/json",
       },
