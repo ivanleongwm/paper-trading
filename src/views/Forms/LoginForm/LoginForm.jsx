@@ -21,7 +21,6 @@ function Login() {
 // react frontend  
   const LoginAccount = (register) => {
     fetch(url, {
-      credentials: 'include',
       method: "POST",
       headers: {
         "Content-Type": "application/json",
