@@ -14,9 +14,9 @@ export default function Buy() {
         axios.get('https://financialmodelingprep.com/api/v3/historical-price-full/AAPL,AMZN,GOOG,MSFT,NVDA?apikey=ed422f5ab8a52bef7a04a8d39de5129d')
         .then(res => {
           const stockObject = res.data;
-          console.log(res.data.historicalStockList)
+          console.log(res.data.historicalStockList[0])
           //console.log(stockObject[0])
-          setStock(stockObject)
+          setStock(res.data.historicalStockList[0])
           console.log(stock)
         })
       },[])
@@ -26,8 +26,8 @@ export default function Buy() {
             <TopSpacer />
             <div className="buy-container">
                 {
-                    Object.keys(stockHistoricalPrices).map(function(key, index) {
-                        return (<BuyStockCard stockHistoricalPrices={stockHistoricalPrices[key]} userAccountData={userAccountData}/>);
+                    Object.keys(stock).map(function(key, index) {
+                        return (<BuyStockCard stockHistoricalPrices={stock} userAccountData={userAccountData}/>);
                       })
                 }
             </div>

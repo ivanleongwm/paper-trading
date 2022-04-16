@@ -21,15 +21,18 @@ export default function BuyStockCard ({stockHistoricalPrices, userAccountData}) 
 
     return (
         <div className="card-container">
-            <div className="text-content">{stockHistoricalPrices.name}</div>
-            <div className="text-content">{stockHistoricalPrices.price}</div>
-            <div className="text-content">{stockHistoricalPrices.twentyFourHourChange}</div>
+            <div className="text-content">{stockHistoricalPrices.symbol}</div>
+            <div className="text-content">{stockHistoricalPrices.historical[0].close}</div>
+            <div className="text-content">{stockHistoricalPrices.historical[0].change}</div>
             <div className="mini-chart-container">
-                <MiniChart historicalPrices={stockHistoricalPrices.historical}/>
+                <MiniChart historicalPrices={stockHistoricalPrices.historical.slice(0,10)}/>
             </div>
             <Form handleSubmit={handleSubmit} historicalPrices={stockHistoricalPrices} userAccountData={userAccountData} />
         </div>
     )
 }
 
+
+//<div className="text-content">{stockHistoricalPrices.price}</div>
+//<div className="text-content">{stockHistoricalPrices.twentyFourHourChange}</div>
 
