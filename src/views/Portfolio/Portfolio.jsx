@@ -5,6 +5,7 @@ import './Portfolio.css'
 import { useState, useEffect } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
+import axios from 'axios';
 
 const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
@@ -13,7 +14,8 @@ export default function Portfolio() {
         user: "",
         purchaseLog:[]
       });
-    const tickers = [];
+    const [tickers,setTickers] = useState({});
+    const [historicalStockPrices, setHistoricalStockPrices] = useState([])
 
       const loginSuccessCheck = () => {
         fetch(url, {
@@ -40,13 +42,50 @@ export default function Portfolio() {
       },[])
 
       useEffect(()=> {
-          // retrieve the tickers held by user
+        // retrieve the tickers held by user
+        const internalSetTickers = {}
         for (const stock of secret.purchaseLog) {
-          tickers.push(stock.ticker)
+            internalSetTickers[stock.ticker] = stock.quantity
         }
-        console.log(tickers)
-        console.log("second secret",secret)
+        setTickers(internalSetTickers)
       },[secret])
+
+      useEffect(()=> {
+          // retrieve historical stock prices for tickers
+          const stockPromises = []
+          const stockResults = []
+
+          const stockTickerCalls = async () => {
+              console.log("tickers",tickers)
+            for (const ticker of Object.keys(tickers)) {
+                stockPromises.push(
+                    axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${ticker}?apikey=ed422f5ab8a52bef7a04a8d39de5129d`)
+                    )
+              }
+    
+              const stockResponses = await Promise.allSettled(stockPromises)
+    
+              stockResponses.forEach((resp,index) => {
+                stockResults.push(resp.value.data)
+              })
+              console.log("resolved api calls",stockResults)
+              setHistoricalStockPrices(stockResults)
+            }
+          stockTickerCalls()
+      },[tickers])
+
+      const retrievePieChartDetails = () => {
+          const stocksHeld = tickers
+          const historicalPrices = historicalStockPrices
+          console.log("STOCKSHELD",stocksHeld)
+          console.log("HISTORICAL PRICES",historicalPrices)
+/*
+          for (const stock of historicalPrices) {
+              stock.historicalStockList[0].symbol
+          }
+*/
+      }
+      retrievePieChartDetails()
 
     return (
         <div>
