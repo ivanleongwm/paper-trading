@@ -6,13 +6,15 @@ import { useState, useEffect } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
 import axios from 'axios';
+import moment from 'moment'
 
 const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
 export default function Portfolio() {
     const [secret, setSecret] = useState({
         user: "",
-        purchaseLog:[]
+        purchaseLog:[],
+        stockBalance: []
       });
     const [tickers,setTickers] = useState({});
     const [historicalStockPrices, setHistoricalStockPrices] = useState([])
@@ -32,7 +34,7 @@ export default function Portfolio() {
           })
           .then((data) => {
             console.log(data)
-            setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog })
+            setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance})
           })
           .catch((error) => console.log(error));
       };
@@ -45,7 +47,7 @@ export default function Portfolio() {
       useEffect(()=> {
         // retrieve the tickers held by user
         const internalSetTickers = {}
-        for (const stock of secret.purchaseLog) {
+        for (const stock of secret.stockBalance) {
             internalSetTickers[stock.ticker] = stock.quantity
         }
         setTickers(internalSetTickers)
@@ -96,10 +98,24 @@ export default function Portfolio() {
           console.log("piechart data",pieChartData)
       }
      
+      const retrieveMainLineChartDetails = () => {
+          const purchaseDates = {}
+          for (let purchase of secret.purchaseLog) {
+              purchaseDates[purchase.ticker] = moment.utc(purchase.date).format('YYYY-MM-DD')
+          }
+        console.log("moment purchase date",purchaseDates)
+        
+        }
+        
 
       useEffect(()=> {
         // calculate pie chart data
         retrievePieChartDetails()
+      },[historicalStockPrices])
+
+      useEffect(()=> {
+        // calculate pie chart data
+        retrieveMainLineChartDetails()
       },[historicalStockPrices])
 
     return (
