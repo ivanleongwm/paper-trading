@@ -19,6 +19,8 @@ export default function Portfolio() {
     const [tickers,setTickers] = useState({});
     const [historicalStockPrices, setHistoricalStockPrices] = useState([])
     const [pieChartData,setPieChartData] = useState([])
+    const [aggregatedByStocksPastSevenDays,setAggregatedByStocksPastSevenDays] = useState([])
+    const [mainLineGraphData,setMainLineGraphData] = useState([])
 
       const loginSuccessCheck = () => {
         fetch(url, {
@@ -123,20 +125,10 @@ export default function Portfolio() {
         }
         console.log("aggregatedPastSevenDays", pastSevenDays)
         const aggregatedByStocksPastSevenDays = pastSevenDays
-    
-        const aggregatedStocks = []
-        for (let i = 0; i < aggregatedByStocksPastSevenDays[0].historical.length; i++) {
-            let totalForDay = 0
-            for (let x = 0; x < aggregatedByStocksPastSevenDays.length; x++) {
-                totalForDay += aggregatedByStocksPastSevenDays[x].historical[i].close
-            }
-            aggregatedStocks.push({
-                date: aggregatedByStocksPastSevenDays[0].historical[i].date,
-                close: totalForDay
-            })
-        }
-        console.log("aggregatedFinal",aggregatedStocks)
+        setAggregatedByStocksPastSevenDays(aggregatedByStocksPastSevenDays)
+        /*
         
+        */
     }
 
         
@@ -151,12 +143,36 @@ export default function Portfolio() {
         retrieveMainLineChartDetails()
       },[historicalStockPrices])
 
+      useEffect(()=> {
+        const aggregatedStocks = []
+        if (aggregatedByStocksPastSevenDays.length > 0) {
+            for (let i = 0; i < aggregatedByStocksPastSevenDays[0].historical.length; i++) {
+                let totalForDay = 0
+                for (let x = 0; x < aggregatedByStocksPastSevenDays.length; x++) {
+                    totalForDay += aggregatedByStocksPastSevenDays[x].historical[i].close
+                }
+                aggregatedStocks.push({
+                    date: aggregatedByStocksPastSevenDays[0].historical[i].date,
+                    close: totalForDay
+                })
+            }
+        console.log("aggregatedFinal",aggregatedStocks)
+        }
+        setMainLineGraphData(aggregatedStocks.reverse())         
+      },[aggregatedByStocksPastSevenDays])
+
+      useEffect(()=> {
+        if (mainLineGraphData.length > 0) {
+            console.log("main line graph data", mainLineGraphData)
+        }
+      },[mainLineGraphData])
+
     return (
         <div>
             <TopSpacer/>
             <div className="chart-container">
                 <PieChart pieChartData={pieChartData}/>
-                <Tabs />
+                <Tabs mainLineGraphData={mainLineGraphData}/>
             </div>
         </div>
     )

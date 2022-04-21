@@ -6,7 +6,7 @@ import './Tabs.css'
 import FirstTabLineChart from './AllTabs/Content/LineChart'
 
  
-export default function Tabs() {
+export default function Tabs({mainLineGraphData}) {
   const [activeTab, setActiveTab] = useState("tab1");
  
   return (
@@ -19,7 +19,7 @@ export default function Tabs() {
  
       <div className="outlet">
         <TabContent id="tab1" activeTab={activeTab}>
-          <FirstTabLineChart/>
+          <FirstTabLineChart mainLineGraphData={mainLineGraphData}/>
         </TabContent>
         <TabContent id="tab2" activeTab={activeTab}>
           <p>Tab 2 works!</p>

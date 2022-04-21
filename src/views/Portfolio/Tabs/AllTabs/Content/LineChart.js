@@ -47,17 +47,18 @@ const data = [
   },
 ];
 
-export default function App() {
+export default function App({mainLineGraphData}) {
     return (
-      <LineChart width={800} height={400} data={data}
+      <LineChart width={800} height={400} data={mainLineGraphData}
         margin={{ top: 10, right: 40, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="date" />
+        <YAxis type="number" domain={['dataMin', 'dataMax']}/>
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="close" stroke="#8884d8" />
       </LineChart>
     );
 }
+
+//<Line type="monotone" dataKey="uv" stroke="#82ca9d" />
