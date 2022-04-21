@@ -19,13 +19,14 @@ const data02 = [
   { name: 'Group F', value: 4800 },
 ];
 
-export default function App() {
+export default function App({pieChartData}) {
+  console.log("Pie Chart Data",pieChartData)
     return (
       <PieChart width={600} height={600}>
           <Pie
             dataKey="value"
             isAnimationActive={true}
-            data={data01}
+            data={pieChartData}
             cx="50%"
             cy="50%"
             outerRadius={200}

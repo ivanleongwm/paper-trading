@@ -16,6 +16,7 @@ export default function Portfolio() {
       });
     const [tickers,setTickers] = useState({});
     const [historicalStockPrices, setHistoricalStockPrices] = useState([])
+    const [pieChartData,setPieChartData] = useState([])
 
       const loginSuccessCheck = () => {
         fetch(url, {
@@ -80,15 +81,18 @@ export default function Portfolio() {
           console.log("STOCKSHELD",stocksHeld)
           console.log("HISTORICAL PRICES",historicalPrices)
 
-          const pieChartData = {}
+          const pieChartData = []
+          const colors = ['#8884d8','#9cacf1','#8dd1e1','#82ca9d','#a4de6c','#d0ed57']
 
-          for (const ticker of Object.keys(stocksHeld)) {
-            for (const stock of historicalPrices) {
-                if (stock.symbol = ticker) {
-                    pieChartData[stock.symbol] = stock.historical[0].close * stocksHeld[stock.symbol]
-                }
-            }
+          for (let i = 0; i < historicalPrices.length; i++) {
+            pieChartData.push({
+                name: historicalPrices[i].symbol,
+                value: historicalPrices[i].historical[0].close * stocksHeld[historicalPrices[i].symbol],
+                fill: colors[i]
+            })    
           }
+          
+          setPieChartData(pieChartData)
           console.log("piechart data",pieChartData)
       }
      
@@ -102,7 +106,7 @@ export default function Portfolio() {
         <div>
             <TopSpacer/>
             <div className="chart-container">
-                <PieChart />
+                <PieChart pieChartData={pieChartData}/>
                 <Tabs />
             </div>
         </div>
