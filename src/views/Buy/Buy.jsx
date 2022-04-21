@@ -64,39 +64,10 @@ export default function Buy() {
               
             cleanedStockResults.sort( compare );
             console.log("cleaned sorted stock list",cleanedStockResults)
+            setStock(cleanedStockResults)
         }
         mainCompanyStockCall()
       },[nasdaq])
-
-/*
-        useEffect( ()=> {
-
-        const companyStockCall = async () => {
-          
-          const stockPromises = cart.map(el=> {
-            return axios.get(`https://financialmodelingprep.com/api/v3/ratios-ttm/${el.symbol}?apikey=ed422f5ab8a52bef7a04a8d39de5129d`)
-          })
-          
-          const stockResponses = await Promise.allSettled(stockPromises)
-          console.log('stockresponses',stockResponses)
-  
-          const stockMap =  {}
-  
-          stockResponses.forEach((resp,index) => {
-            if(resp.status === 'fulfilled') {
-              stockMap[cart[index].symbol] = resp.value.data[0]
-            }
-          })
-  
-          setRatios(stockMap)
-        }
-  
-        companyStockCall()
-  
-        },[cart])
-
-*/
-
 
     return (
         <div>
@@ -111,11 +82,3 @@ export default function Buy() {
         </div>
     )
 }
-
-/*
-Object.keys(myObject).map(function(key, index) {
-  myObject[key] *= 2;
-});
-
-
-*/

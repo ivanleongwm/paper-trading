@@ -7,7 +7,8 @@ const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
 function LoginSuccessful() {
   const [secret, setSecret] = useState({
-    user: ""
+    user: "",
+    purchaseLog:[]
   });
 
   const loginSuccessCheck = () => {
@@ -24,7 +25,7 @@ function LoginSuccessful() {
       })
       .then((data) => {
         console.log(data)
-        setSecret({ ...secret, user: data })
+        setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog })
       })
       .catch((error) => console.log(error));
   };
@@ -37,6 +38,7 @@ function LoginSuccessful() {
     <body>
       <h1>Login Successful</h1>
       <h1>Login Successful: { secret.user }</h1>
+      <h1>stock holdings: {secret.purchaseLog.toString()}</h1>
     </body>
   );
 }
