@@ -10,7 +10,7 @@ function LoginSuccessful() {
     user: "",
     purchaseLog:[]
   });
-
+  
   const loginSuccessCheck = () => {
     fetch(url, {
       method: "GET",
@@ -24,7 +24,7 @@ function LoginSuccessful() {
         return response.json()
       })
       .then((data) => {
-        console.log(data)
+        console.log("first data",data)
         setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog })
       })
       .catch((error) => console.log(error));
