@@ -172,7 +172,7 @@ export default function Portfolio() {
             <TopSpacer/>
             <div className="chart-container">
                 <PieChart pieChartData={pieChartData}/>
-                <Tabs mainLineGraphData={mainLineGraphData}/>
+                <Tabs mainLineGraphData={mainLineGraphData} individualLineGraphData={aggregatedByStocksPastSevenDays}/>
             </div>
         </div>
     )

@@ -47,9 +47,9 @@ const data = [
   },
 ];
 
-export default function App({mainLineGraphData}) {
+export default function App({stockdata}) {
     return (
-      <LineChart width={800} height={400} data={mainLineGraphData}
+      <LineChart width={800} height={400} data={stockdata.historical.reverse()}
         margin={{ top: 10, right: 40, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
