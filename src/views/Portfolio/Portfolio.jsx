@@ -105,7 +105,40 @@ export default function Portfolio() {
           }
         console.log("moment purchase date",purchaseDates)
         
+    
+        const pastSevenDays = []
+        for (let stock of historicalStockPrices) {
+            pastSevenDays.push({
+                symbol : stock.symbol,
+                historical : stock.historical.slice(0,7)
+            })
         }
+        console.log("pastSevenDays", pastSevenDays )
+
+        const stocksHeld = tickers
+        for (let stock of pastSevenDays) {
+            for (let dailyData of stock.historical) {
+                dailyData.close = dailyData.close * stocksHeld[stock.symbol]
+            }
+        }
+        console.log("aggregatedPastSevenDays", pastSevenDays)
+        const aggregatedByStocksPastSevenDays = pastSevenDays
+    
+        const aggregatedStocks = []
+        for (let i = 0; i < aggregatedByStocksPastSevenDays[0].historical.length; i++) {
+            let totalForDay = 0
+            for (let x = 0; x < aggregatedByStocksPastSevenDays.length; x++) {
+                totalForDay += aggregatedByStocksPastSevenDays[x].historical[i].close
+            }
+            aggregatedStocks.push({
+                date: aggregatedByStocksPastSevenDays[0].historical[i].date,
+                close: totalForDay
+            })
+        }
+        console.log("aggregatedFinal",aggregatedStocks)
+        
+    }
+
         
 
       useEffect(()=> {
