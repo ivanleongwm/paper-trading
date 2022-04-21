@@ -79,13 +79,24 @@ export default function Portfolio() {
           const historicalPrices = historicalStockPrices
           console.log("STOCKSHELD",stocksHeld)
           console.log("HISTORICAL PRICES",historicalPrices)
-/*
-          for (const stock of historicalPrices) {
-              stock.historicalStockList[0].symbol
+
+          const pieChartData = {}
+
+          for (const ticker of Object.keys(stocksHeld)) {
+            for (const stock of historicalPrices) {
+                if (stock.symbol = ticker) {
+                    pieChartData[stock.symbol] = stock.historical[0].close * stocksHeld[stock.symbol]
+                }
+            }
           }
-*/
+          console.log("piechart data",pieChartData)
       }
-      retrievePieChartDetails()
+     
+
+      useEffect(()=> {
+        // calculate pie chart data
+        retrievePieChartDetails()
+      },[historicalStockPrices])
 
     return (
         <div>
