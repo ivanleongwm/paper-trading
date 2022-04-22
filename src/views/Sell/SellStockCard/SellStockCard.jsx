@@ -1,5 +1,5 @@
 import MiniChart from '../MiniChart/MiniChart'
-import './BuyStockCard.css'
+import './SellStockCard.css'
 import Form from '../Form/ControlledForm'
 import { useState } from 'react';
 import productsArr from '../Form/products';

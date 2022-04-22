@@ -1,8 +1,8 @@
 import TopSpacer from "../Header/TopSpacer";
 import stockHistoricalPrices from "../../model/stockHistoricalPrices"
 import userAccountData from "../../model/userAccountData";
-import BuyStockCard from "./BuyStockCard/BuyStockCard";
-import './Buy.css';
+import SellStockCard from "./SellStockCard/SellStockCard";
+import './Sell.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import urlcat from "urlcat";
@@ -108,7 +108,7 @@ export default function Buy({ secret, setSecret }) {
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret2.user}/>);
+                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret2.user}/>);
                       })
                 }
             </div>

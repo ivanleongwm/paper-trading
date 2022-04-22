@@ -65,7 +65,7 @@ function Form(props) {
         onSubmit={handleSubmit}
       >
         <label>
-          Buy Quantity : |  
+          Sell Quantity : |  
           <input className="input-quantity"
             name="Quantity"
             placeholder="qty"
