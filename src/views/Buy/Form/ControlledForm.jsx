@@ -1,7 +1,48 @@
 import React, { useState } from "react";
 import './ControlledForm.css'
+import urlcat from "urlcat";
+import { BACKEND } from "../../../utils/utils";
+
+const url = urlcat(BACKEND, "/api/users/register");
 
 function Form(props) {
+  const [error, setError] = useState("");
+  const [date, setCurrentDate] = useState("2022-04-22");
+  const [purchasePrice, setPurchasePrice] = useState(2.23);
+  const [quantity, setQuantity] = useState(12);
+  const [username, setUsername] = useState("Joy Kwok");
+  const [ticker,setTicker] = useState("AAPL");
+  // create a function that makes a post request when the buy button is clicked
+  const buyStock = (stockDetails) => {
+    fetch(url, {
+      method: "POST",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(stockDetails),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("form submitted!")
+    const stockDetails = { username, date, ticker, quantity, purchasePrice };
+    buyStock(stockDetails);
+  };
+
+  // with the current date, today's price and quantity, username
+
+  // might need to store current state of logged in user on the superparent level
+
+
   //sets the 'default' fields in the form
   const [formData, setFormData] = useState({
     Quantity: 0,
@@ -15,17 +56,12 @@ function Form(props) {
     console.log(formData);
   };
 
-  console.log("controlled form historical prices",props.historicalPrices)
-
+  console.log(props.historicalPrices)
   //in onSubmit; passing props to parent through handleSubmit
   return (
     <div className="form-container">
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          console.log("clicked");
-          return props.handleSubmit(formData);
-        }}
+        onSubmit={handleSubmit}
       >
         <label>
           Buy Quantity : |  
@@ -43,9 +79,8 @@ function Form(props) {
           <input className="buy-button" type="submit" value="Buy" /> :
           <div className="funds-exceeded">Insufficient Funds (Max:{(props.userAccountData.Ivan.balance).toLocaleString('en', {useGrouping:true})})</div>
       }
+        <p>{error}</p>
       </form>
-      
-      
     </div>
   );
 }
