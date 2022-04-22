@@ -11,7 +11,7 @@ function Form(props) {
   const [username, setUsername] = useState(props.username);
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
   // create a function that makes a post request when the buy button is clicked
-  const url = urlcat(BACKEND, `/api/holding/${username}`);
+  const url = urlcat(BACKEND, `/api/holding/updatedPurchaseLog/${username}`);
 
   const buyStock = (stockDetails) => {
     fetch(url, {

@@ -21,13 +21,14 @@ function LoginSuccessful({secret,setSecret}) {
       })
       .then((data) => {
         console.log("first data",data)
-        setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog })
+        setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
     loginSuccessCheck()
+    console.log("SECRET TEST1",secret)
   },[])
 
   return (
