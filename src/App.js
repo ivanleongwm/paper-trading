@@ -25,7 +25,7 @@ function App() {
           <HeaderBar />
           <Routes>
             <Route path="/" element={<Portfolio />}/>
-            <Route path="/buy" element={<Buy />}/>
+            <Route path="/buy" element={<Buy secret={secret} setSecret={setSecret} />}/>
             <Route path="/sell" element={<Sell />}/>
             <Route path="/loginsuccessful" element={<LoginSuccessful secret={secret} setSecret={setSecret} />}/>
             <Route path="/register" element={<RegisterForm/>}/>

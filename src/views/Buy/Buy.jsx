@@ -5,10 +5,41 @@ import BuyStockCard from "./BuyStockCard/BuyStockCard";
 import './Buy.css';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
+import urlcat from "urlcat";
+import { BACKEND } from "../../utils/utils";
 
-export default function Buy() {
+export default function Buy({ secret, setSecret }) {
     const [stock, setStock] = useState([])
     const [nasdaq,setNasdaq] = useState("")
+    const [secret2, setSecret2] = useState({
+        user: "",
+        purchaseLog:[]
+      });
+
+    const url = urlcat(BACKEND, "/api/users/loginsuccessful");
+
+    const loginSuccessCheck = () => {
+        fetch(url, {
+          method: "GET",
+          credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+              console.log(response)
+            return response.json()
+          })
+          .then((data) => {
+            console.log("first data",data)
+            setSecret2({ ...secret2, user: data.username, purchaseLog: data.purchaseLog })
+          })
+          .catch((error) => console.log(error));
+      };
+    
+      useEffect(() => {
+        loginSuccessCheck()
+      },[])
     
       useEffect(()=> {
         axios.get('https://financialmodelingprep.com/api/v3/nasdaq_constituent?apikey=ed422f5ab8a52bef7a04a8d39de5129d')
@@ -69,13 +100,15 @@ export default function Buy() {
         mainCompanyStockCall()
       },[nasdaq])
 
+    console.log("secret state from other component",secret)
+
     return (
         <div>
             <TopSpacer />
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData}/>);
+                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret2.user}/>);
                       })
                 }
             </div>

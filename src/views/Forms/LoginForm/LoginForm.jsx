@@ -14,7 +14,7 @@ function Login() {
 
   const loginIsSuccessful = (dataResponse) => {
     if (dataResponse == "Valid password") {
-      navigate("/");
+      navigate("/loginsuccessful");
     }
   }
 

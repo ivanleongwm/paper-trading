@@ -8,7 +8,7 @@ function Form(props) {
   const [date, setCurrentDate] = useState(props.historicalPrices.historical[0].date);
   const [purchasePrice, setPurchasePrice] = useState(props.historicalPrices.historical[0].close);
   const [quantity, setQuantity] = useState(12);
-  const [username, setUsername] = useState("Joy Kwok");
+  const [username, setUsername] = useState(props.username);
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
   // create a function that makes a post request when the buy button is clicked
   const url = urlcat(BACKEND, `/api/holding/${username}`);
