@@ -15,6 +15,8 @@ function Form(props) {
     console.log(formData);
   };
 
+  console.log("controlled form historical prices",props.historicalPrices)
+
   //in onSubmit; passing props to parent through handleSubmit
   return (
     <div className="form-container">
@@ -35,9 +37,9 @@ function Form(props) {
           />
           |
         </label>
-        <div>Total Price: {(formData.price * props.historicalPrices.price).toLocaleString('en', {useGrouping:true})}</div>
+        <div>Total Price: {(formData.price * props.historicalPrices.historical[0].close).toLocaleString('en', {useGrouping:true})}</div>
       {
-          (formData.price * props.historicalPrices.price) < props.userAccountData.Ivan.balance ?
+          (formData.price * props.historicalPrices.historical[0].close) < props.userAccountData.Ivan.balance ?
           <input className="buy-button" type="submit" value="Buy" /> :
           <div className="funds-exceeded">Insufficient Funds (Max:{(props.userAccountData.Ivan.balance).toLocaleString('en', {useGrouping:true})})</div>
       }
