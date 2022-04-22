@@ -7,11 +7,11 @@ const url = urlcat(BACKEND, "/api/users/register");
 
 function Form(props) {
   const [error, setError] = useState("");
-  const [date, setCurrentDate] = useState("2022-04-22");
-  const [purchasePrice, setPurchasePrice] = useState(2.23);
+  const [date, setCurrentDate] = useState(props.historicalPrices.historical[0].date);
+  const [purchasePrice, setPurchasePrice] = useState(props.historicalPrices.historical[0].close);
   const [quantity, setQuantity] = useState(12);
   const [username, setUsername] = useState("Joy Kwok");
-  const [ticker,setTicker] = useState("AAPL");
+  const [ticker,setTicker] = useState(props.historicalPrices.symbol);
   // create a function that makes a post request when the buy button is clicked
   const buyStock = (stockDetails) => {
     fetch(url, {
@@ -54,6 +54,7 @@ function Form(props) {
     const name = event.target.name; //refers to input name
     setFormData({ ...formData, [name]: event.target.value, price: event.target.value }); //name is in sq brackets is to refer to variable in this scope (this.name)
     console.log(formData);
+    setQuantity(event.target.value)
   };
 
   console.log(props.historicalPrices)
