@@ -3,8 +3,6 @@ import './ControlledForm.css'
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 
-const url = urlcat(BACKEND, "/api/users/register");
-
 function Form(props) {
   const [error, setError] = useState("");
   const [date, setCurrentDate] = useState(props.historicalPrices.historical[0].date);
@@ -13,9 +11,11 @@ function Form(props) {
   const [username, setUsername] = useState("Joy Kwok");
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
   // create a function that makes a post request when the buy button is clicked
+  const url = urlcat(BACKEND, `/api/holding/${username}`);
+
   const buyStock = (stockDetails) => {
     fetch(url, {
-      method: "POST",
+      method: "PUT",
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ function Form(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("form submitted!")
-    const stockDetails = { username, date, ticker, quantity, purchasePrice };
+    const stockDetails = { date, ticker, quantity, purchasePrice };
     buyStock(stockDetails);
   };
 

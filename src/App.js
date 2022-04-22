@@ -9,9 +9,15 @@ import LoginSuccessful from './views/Forms/LoginSuccess/LoginSuccess';
 import FormDataDisplay from './views/Forms/FormDataDisplay/FormDataDisplay';
 import Buy from './views/Buy/Buy'
 import Sell from './views/Sell/Sell'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {useState} from 'react';
 
 function App() {
+  const [secret, setSecret] = useState({
+    user: "",
+    purchaseLog:[]
+  });
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -21,7 +27,7 @@ function App() {
             <Route path="/" element={<Portfolio />}/>
             <Route path="/buy" element={<Buy />}/>
             <Route path="/sell" element={<Sell />}/>
-            <Route path="/loginsuccessful" element={<LoginSuccessful/>}/>
+            <Route path="/loginsuccessful" element={<LoginSuccessful secret={secret} setSecret={setSecret} />}/>
             <Route path="/register" element={<RegisterForm/>}/>
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/display" element={<FormDataDisplay/>}/>

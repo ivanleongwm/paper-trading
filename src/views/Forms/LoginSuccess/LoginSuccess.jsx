@@ -5,11 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
-function LoginSuccessful() {
-  const [secret, setSecret] = useState({
-    user: "",
-    purchaseLog:[]
-  });
+function LoginSuccessful({secret,setSecret}) {
   
   const loginSuccessCheck = () => {
     fetch(url, {
