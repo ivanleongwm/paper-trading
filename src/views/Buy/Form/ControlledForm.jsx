@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import './ControlledForm.css'
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
@@ -7,11 +7,45 @@ function Form(props) {
   const [error, setError] = useState("");
   const [date, setCurrentDate] = useState(props.historicalPrices.historical[0].date);
   const [purchasePrice, setPurchasePrice] = useState(props.historicalPrices.historical[0].close);
-  const [quantity, setQuantity] = useState(12);
+  const [quantity, setQuantity] = useState(0);
   const [username, setUsername] = useState(props.username);
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
+  const [secret, setSecret] = useState({
+    user: "",
+    purchaseLog:[],
+    stockBalance: []
+  });
+  const [stockBalanceOriginalState,setStockBalanceOriginalState] = useState([])
+
   // create a function that makes a post request when the buy button is clicked
-  const url = urlcat(BACKEND, `/api/holding/gupdatedPurchaseLog/${username}`);
+  const url = urlcat(BACKEND, `/api/holding/updatedPurchaseLog/${username}`);
+  const url2 = urlcat(BACKEND, "/api/users/loginsuccessful");
+  const url3 = urlcat(BACKEND, `/api/holding/updatedStockBalance/${username}`);
+
+  const loginSuccessCheck = () => {
+    fetch(url2, {
+      method: "GET",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+          console.log(response)
+        return response.json()
+      })
+      .then((data) => {
+        console.log("USERHOLDINGDATACHECK",data)
+        setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance})
+        setStockBalanceOriginalState(data.stockBalance)
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+      // retrieve stockholdings data for user
+    loginSuccessCheck()
+  },[])
 
   const buyStock = (stockDetails) => {
     fetch(url, {
@@ -31,11 +65,78 @@ function Form(props) {
       .catch((error) => console.log(error));
   };
 
+  const buyStock2 = (stockBalanceStateValue) => {
+    // puts new stockBalance array into Stock Balance
+    fetch(url3, {
+      method: "PUT",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"stockBalance" : stockBalanceStateValue}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  //put to stockBalance works, however, ticker state changes onchange, resulting in change
+  // or original array. Need to save original array somewhere, and push new ticker in
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+
+  const updateStockBalance = (ticker,quantity) => {
+    let newState = null;
+    const oldStock = stockBalanceOriginalState.find(x => x.ticker === ticker)
+    if (oldStock) {
+      const otherStocks = stockBalanceOriginalState.filter(x => x.ticker !== ticker)
+      const newStock = { ...oldStock, quantity: oldStock.quantity + Number(quantity)}
+      newState = [ ...otherStocks, newStock]
+    } else {
+      const newStock = { ticker, quantity}
+      newState = [...stockBalanceOriginalState, newStock]
+    }
+    // let stockBalanceState = [...stockBalanceOriginalState]
+    // let toPush = true;
+    // let addedStock = true;
+
+    // for (let i=0;i<stockBalanceState.length; i++) {
+    //   //let stock of stockBalanceState
+    //   console.log('stockticer', stockBalanceState[i].ticker, typeof stockBalanceState[i].ticker)
+    //   console.log('tick2', ticker)
+    //   console.log('before', stockBalanceState[i])
+    //   if (stockBalanceState[i].ticker == ticker && addedStock) {
+    //     const newStock = {...stockBalanceState[i]}
+    //     newStock.quantity = Number(stockBalanceState[i].quantity) + Number(quantity)
+    //     toPush = false;
+    //     addedStock = false;
+    //   } 
+      
+    // }
+
+    // if (toPush) {
+    //   stockBalanceState.push({
+    //     "ticker": ticker,
+    //     "quantity": quantity
+    //   })
+    // }
+
+    // console.log("STOCKBALANCEAFTER",stockBalanceState)
+    // setSecret({stockBalance: stockBalanceState})
+    buyStock2(newState)
+    setStockBalanceOriginalState(newState)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("form submitted!")
     const stockDetails = { date, ticker, quantity, purchasePrice };
-    buyStock(stockDetails);
+    //buyStock(stockDetails);
+    console.log('ticker',ticker)
+    updateStockBalance(ticker,quantity)
   };
 
   // with the current date, today's price and quantity, username

@@ -12,6 +12,8 @@ function Form(props) {
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
   // create a function that makes a post request when the buy button is clicked
   const url = urlcat(BACKEND, `/api/holding/gupdatedPurchaseLog/${username}`);
+  
+  let quantityHeld = 0;
 
   const buyStock = (stockDetails) => {
     fetch(url, {
@@ -41,7 +43,13 @@ function Form(props) {
   // with the current date, today's price and quantity, username
 
   // might need to store current state of logged in user on the superparent level
-
+  for (let stock of props.secret.stockBalance) {
+    if (stock.ticker == props.historicalPrices.symbol) {
+      quantityHeld = stock.quantity
+    } else {
+      quantityHeld = 0;
+    }
+  }
 
   //sets the 'default' fields in the form
   const [formData, setFormData] = useState({
@@ -74,11 +82,11 @@ function Form(props) {
           />
           |
         </label>
-        <div>Total Price: {(formData.price * props.historicalPrices.historical[0].close).toLocaleString('en', {useGrouping:true})}</div>
+        <div>Total Proceeds: {(formData.price * props.historicalPrices.historical[0].close).toLocaleString('en', {useGrouping:true})}</div>
       {
-          (formData.price * props.historicalPrices.historical[0].close) < props.userAccountData.Ivan.balance ?
-          <input className="buy-button" type="submit" value="Buy" /> :
-          <div className="funds-exceeded">Insufficient Funds (Max:{(props.userAccountData.Ivan.balance).toLocaleString('en', {useGrouping:true})})</div>
+          (quantity) <= quantityHeld ?
+          <input className="buy-button" type="submit" value="Sell" /> :
+          <div className="funds-exceeded">Insufficient Stocks (Max:{(quantityHeld).toLocaleString('en', {useGrouping:true})})</div>
       }
         <p>{error}</p>
       </form>

@@ -8,12 +8,13 @@ import axios from 'axios';
 import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
 
-export default function Buy({ secret, setSecret }) {
+export default function Sell({ secret, setSecret }) {
     const [stock, setStock] = useState([])
     const [nasdaq,setNasdaq] = useState("")
     const [secret2, setSecret2] = useState({
         user: "",
-        purchaseLog:[]
+        purchaseLog:[],
+        stockBalance:[]
       });
 
     const url = urlcat(BACKEND, "/api/users/loginsuccessful");
@@ -32,7 +33,7 @@ export default function Buy({ secret, setSecret }) {
           })
           .then((data) => {
             console.log("first data",data)
-            setSecret2({ ...secret2, user: data.username, purchaseLog: data.purchaseLog })
+            setSecret2({ ...secret2, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
           })
           .catch((error) => console.log(error));
       };
@@ -108,7 +109,7 @@ export default function Buy({ secret, setSecret }) {
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret2.user}/>);
+                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret2} />);
                       })
                 }
             </div>

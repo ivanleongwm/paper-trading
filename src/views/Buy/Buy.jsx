@@ -32,7 +32,7 @@ export default function Buy({ secret, setSecret }) {
           })
           .then((data) => {
             console.log("first data",data)
-            setSecret2({ ...secret2, user: data.username, purchaseLog: data.purchaseLog })
+            setSecret2({ ...secret2, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
           })
           .catch((error) => console.log(error));
       };
@@ -108,7 +108,7 @@ export default function Buy({ secret, setSecret }) {
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret2.user}/>);
+                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret2} setSecret={setSecret2} username={secret2.user}/>);
                       })
                 }
             </div>
