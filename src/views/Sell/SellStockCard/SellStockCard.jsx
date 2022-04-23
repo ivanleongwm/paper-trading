@@ -1,13 +1,13 @@
 import MiniChart from '../MiniChart/MiniChart'
 import './SellStockCard.css'
 import Form from '../Form/ControlledForm'
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import productsArr from '../Form/products';
 
 export default function BuyStockCard ({stockHistoricalPrices, userAccountData,  secret,  setSecret, username }) {
 
     const [products, setProducts] = useState(productsArr);
-    let quantityHeld = 0
+    const [quantityHeld,setQuantityHeld] = useState(0)
 
     const handleSubmit = (productName,productPrice,productDescription) => {
         setProducts([
@@ -20,14 +20,17 @@ export default function BuyStockCard ({stockHistoricalPrices, userAccountData,  
         ])
       }
       
-console.log("SELLSTOCKCARD WHAT ",secret)
-      for (let stock of secret.stockBalance) {
-        if (stock.ticker == stockHistoricalPrices.symbol) {
-          quantityHeld = stock.quantity
-        } else {
-          quantityHeld = 0;
+      useEffect(()=>{
+        for (let stock of secret.stockBalance) {
+          //console.log("SELLCARDSECRET",secret.stockBalance)
+          if (stock.ticker == stockHistoricalPrices.symbol) {
+            setQuantityHeld(stock.quantity)
+            //console.log("HISTORICALPRICESSYMBOL",stockHistoricalPrices.symbol)
+            console.log("ACTUALTICKERQTY",quantityHeld)
+          } 
         }
-      }
+      },[secret.stockBalance])
+      
 
     return (
         <div className="card-container">
