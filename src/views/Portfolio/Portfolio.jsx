@@ -21,6 +21,8 @@ export default function Portfolio() {
     const [pieChartData,setPieChartData] = useState([])
     const [aggregatedByStocksPastSevenDays,setAggregatedByStocksPastSevenDays] = useState([])
     const [mainLineGraphData,setMainLineGraphData] = useState([])
+    const [colours,setColours] = useState({})
+    const [coloursState,setColoursState] = useState(['#ADD8E6','#9cacf1','#8dd1e1','#82ca9d','#a4de6c','#d0ed57'])
 
       const loginSuccessCheck = () => {
         fetch(url, {
@@ -45,6 +47,36 @@ export default function Portfolio() {
           // retrieve stockholdings data for user
         loginSuccessCheck()
       },[])
+
+      const fetchColours = () => {
+        const url2 = urlcat(BACKEND, `/api/piechart/colours/${secret.user}`);
+        fetch(url2, {
+          method: "GET",
+          credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+              console.log(response)
+            return response.json()
+          })
+          .then((data) => {
+            console.log("first data colours",data)
+            setColours(data)
+        })
+          .catch((error) => console.log(error));
+      };
+
+      useEffect(()=>{
+        fetchColours()
+        console.log("SECRET AFTER FIRST USEEFFECT",secret)
+      },[secret])
+
+      useEffect(()=> {
+        console.log("SECOND COLOR",colours.colour2)
+        setColoursState([colours.colour1,colours.colour2,colours.colour3,colours.colour4,colours.colour5,colours.colour6])
+      },[colours])
 
       useEffect(()=> {
         // retrieve the tickers held by user
@@ -86,13 +118,14 @@ export default function Portfolio() {
           console.log("HISTORICAL PRICES",historicalPrices)
 
           const pieChartData = []
-          const colors = ['#8884d8','#9cacf1','#8dd1e1','#82ca9d','#a4de6c','#d0ed57']
+          
 
+         
           for (let i = 0; i < historicalPrices.length; i++) {
             pieChartData.push({
                 name: historicalPrices[i].symbol,
                 value: historicalPrices[i].historical[0].close * stocksHeld[historicalPrices[i].symbol],
-                fill: colors[i]
+                fill: coloursState[i]
             })    
           }
           
@@ -136,7 +169,7 @@ export default function Portfolio() {
       useEffect(()=> {
         // calculate pie chart data
         retrievePieChartDetails()
-      },[historicalStockPrices])
+      },[historicalStockPrices,colours])
 
       useEffect(()=> {
         // calculate pie chart data
