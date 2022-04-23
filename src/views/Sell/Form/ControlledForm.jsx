@@ -59,6 +59,7 @@ function Form(props) {
     const oldStock = props.stockBalanceOriginalState.find(x => x.ticker === ticker)
     if (oldStock) {
       const otherStocks = props.stockBalanceOriginalState.filter(x => x.ticker !== ticker)
+      props.setQuantityHeld(Number(oldStock.quantity) - Number(quantity))
       if ((Number(oldStock.quantity) - Number(quantity))== 0) {
         newState = [ ...otherStocks]
       } else {
