@@ -3,6 +3,7 @@ import FooterButton from './FooterButton'
 import portfolio from './Icons/portfolio.png'
 import buy from './Icons/buy.png'
 import sell from './Icons/sell.png'
+import piechart from './Icons/piechart.png'
 
 const buttons = [
     {
@@ -19,6 +20,11 @@ const buttons = [
         name: 'Sell',
         icon: sell,
         link: '/sell'
+    },
+    {
+        name: 'Pie Chart',
+        icon: piechart,
+        link: '/piechart'
     }
 ]
 
