@@ -10,42 +10,11 @@ function Form(props) {
   const [quantity, setQuantity] = useState(0);
   const [username, setUsername] = useState(props.username);
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
-  const [secret, setSecret] = useState({
-    user: "",
-    purchaseLog:[],
-    stockBalance: []
-  });
-  const [stockBalanceOriginalState,setStockBalanceOriginalState] = useState([])
 
   // create a function that makes a post request when the buy button is clicked
   const url = urlcat(BACKEND, `/api/holding/updatedPurchaseLog/${username}`);
   const url2 = urlcat(BACKEND, "/api/users/loginsuccessful");
   const url3 = urlcat(BACKEND, `/api/holding/updatedStockBalance/${username}`);
-
-  const loginSuccessCheck = () => {
-    fetch(url2, {
-      method: "GET",
-      credentials: 'include',
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-          console.log(response)
-        return response.json()
-      })
-      .then((data) => {
-        console.log("USERHOLDINGDATACHECK",data)
-        setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance})
-        setStockBalanceOriginalState(data.stockBalance)
-      })
-      .catch((error) => console.log(error));
-  };
-
-  useEffect(() => {
-      // retrieve stockholdings data for user
-    loginSuccessCheck()
-  },[])
 
   const buyStock = (stockDetails) => {
     fetch(url, {
@@ -54,7 +23,7 @@ function Form(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(stockDetails),
+      body: JSON.stringify({"purchaseLog":[stockDetails]}),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -90,14 +59,14 @@ function Form(props) {
 
   const updateStockBalance = (ticker,quantity) => {
     let newState = null;
-    const oldStock = stockBalanceOriginalState.find(x => x.ticker === ticker)
+    const oldStock = props.stockBalanceOriginalState.find(x => x.ticker === ticker)
     if (oldStock) {
-      const otherStocks = stockBalanceOriginalState.filter(x => x.ticker !== ticker)
-      const newStock = { ...oldStock, quantity: oldStock.quantity + Number(quantity)}
+      const otherStocks = props.stockBalanceOriginalState.filter(x => x.ticker !== ticker)
+      const newStock = { ...oldStock, quantity: Number(oldStock.quantity) + Number(quantity)}
       newState = [ ...otherStocks, newStock]
     } else {
-      const newStock = { ticker, quantity}
-      newState = [...stockBalanceOriginalState, newStock]
+      const newStock = { ticker, quantity:Number(quantity)}
+      newState = [...props.stockBalanceOriginalState, newStock]
     }
     // let stockBalanceState = [...stockBalanceOriginalState]
     // let toPush = true;
@@ -127,14 +96,14 @@ function Form(props) {
     // console.log("STOCKBALANCEAFTER",stockBalanceState)
     // setSecret({stockBalance: stockBalanceState})
     buyStock2(newState)
-    setStockBalanceOriginalState(newState)
+    props.setStockBalanceOriginalState(newState)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("form submitted!")
     const stockDetails = { date, ticker, quantity, purchasePrice };
-    //buyStock(stockDetails);
+    buyStock(stockDetails);
     console.log('ticker',ticker)
     updateStockBalance(ticker,quantity)
   };

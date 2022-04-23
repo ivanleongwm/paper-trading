@@ -8,13 +8,15 @@ import axios from 'axios';
 import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
 
-export default function Buy({ secret, setSecret }) {
+export default function Buy() {
     const [stock, setStock] = useState([])
     const [nasdaq,setNasdaq] = useState("")
-    const [secret2, setSecret2] = useState({
+    const [secret, setSecret] = useState({
         user: "",
-        purchaseLog:[]
-      });
+        purchaseLog:[],
+        stockBalance: []
+        });
+    const [stockBalanceOriginalState,setStockBalanceOriginalState] = useState([])
 
     const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
@@ -31,13 +33,15 @@ export default function Buy({ secret, setSecret }) {
             return response.json()
           })
           .then((data) => {
-            console.log("first data",data)
-            setSecret2({ ...secret2, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
+            console.log("USERHOLDINGDATACHECK",data)
+            setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance})
+            setStockBalanceOriginalState(data.stockBalance)
           })
           .catch((error) => console.log(error));
       };
     
       useEffect(() => {
+          // retrieve stockholdings data for user
         loginSuccessCheck()
       },[])
     
@@ -108,7 +112,7 @@ export default function Buy({ secret, setSecret }) {
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret2} setSecret={setSecret2} username={secret2.user}/>);
+                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret.user} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState}/>);
                       })
                 }
             </div>
