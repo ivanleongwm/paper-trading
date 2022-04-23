@@ -12,6 +12,7 @@ function Form(props) {
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
   // create a function that makes a post request when the buy button is clicked
   const url = urlcat(BACKEND, `/api/holding/updatedSalesLog/${username}`);
+  const url3 = urlcat(BACKEND, `/api/holding/updatedStockBalance/${username}`);
   
   let quantityHeld = 0;
 
@@ -33,14 +34,57 @@ function Form(props) {
       .catch((error) => console.log(error));
   };
 
+  const sellStock2 = (stockBalanceStateValue) => {
+    // puts new stockBalance array into Stock Balance
+    fetch(url3, {
+      method: "PUT",
+      credentials: 'include',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"stockBalance" : stockBalanceStateValue}),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          setError(data.error);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const updateStockBalance = (ticker,quantity) => {
+    let newState = null;
+    console.log("STOCKBALANCEORIGINAL",props.stockBalanceOriginalState)
+    const oldStock = props.stockBalanceOriginalState.find(x => x.ticker === ticker)
+    if (oldStock) {
+      const otherStocks = props.stockBalanceOriginalState.filter(x => x.ticker !== ticker)
+      if ((Number(oldStock.quantity) - Number(quantity))== 0) {
+        newState = [ ...otherStocks]
+      } else {
+        const newStock = { ...oldStock, quantity: Number(oldStock.quantity) - Number(quantity)}
+        newState = [ ...otherStocks, newStock]
+      }
+      
+    } else {
+      const newStock = { ticker, quantity:Number(quantity)}
+      newState = [...props.stockBalanceOriginalState, newStock]
+    }
+    sellStock2(newState)
+    props.setStockBalanceOriginalState(newState)
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("form submitted!")
     const stockDetails = { date, ticker, quantity, purchasePrice };
     sellStock(stockDetails);
+    updateStockBalance(ticker,quantity)
   };
 
   // with the current date, today's price and quantity, username
+  
+
 
   // might need to store current state of logged in user on the superparent level
   for (let stock of props.secret.stockBalance) {
