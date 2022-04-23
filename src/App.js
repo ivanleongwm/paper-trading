@@ -26,7 +26,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Portfolio />}/>
             <Route path="/buy" element={<Buy secret={secret} setSecret={setSecret} />}/>
-            <Route path="/sell" element={<Sell />}/>
+            <Route path="/sell" element={<Sell secret={secret} setSecret={setSecret}/>}/>
             <Route path="/loginsuccessful" element={<LoginSuccessful secret={secret} setSecret={setSecret} />}/>
             <Route path="/register" element={<RegisterForm/>}/>
             <Route path="/login" element={<LoginForm/>}/>

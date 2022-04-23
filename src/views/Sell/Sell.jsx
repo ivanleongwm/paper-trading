@@ -109,7 +109,7 @@ export default function Sell({ secret, setSecret }) {
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret2} />);
+                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret2} username={secret2.user}/>);
                       })
                 }
             </div>
