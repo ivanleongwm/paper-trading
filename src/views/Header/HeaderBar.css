@@ -1,4 +1,4 @@
-.fixedElement {
+.headerContainer {
     background-color: #39445a;
     position:fixed;
     top:0;
@@ -10,4 +10,40 @@
     font-size: 5vw;
     justify-content: center;
     padding-bottom: 15px;
+}
+
+.fixedElement {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+}
+
+.loggedInUser {
+    font-size: 1.5vw;
+    width:220px;
+    padding-top:15px;
+}
+
+.title {
+    width: 600px;
+}
+
+.links {
+    padding-top: 15px;
+    color: white;
+    font-size:1.5vw;
+    width: 220px;
+    text-align: right;
+}
+a {
+    display:flex;
+    text-decoration:none;
+    color:white
+}
+
+a:hover {
+    display:flex;
+    text-decoration:none;
+    color:yellow
 }
