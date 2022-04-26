@@ -114,7 +114,9 @@ We used Figma to create a rough skeleton for our project's expected outcome : ht
 
 5. Create logout route for front-end. Link and redirect every piece together.
 
-6. Complete this read-me page.
+6. Display history made by user (bought and sold stocks). Created profile icon at footer bar.
+
+7. Complete this read-me page.
 
 
 
@@ -128,10 +130,11 @@ Another hurdle would be the login authorisation and sessions/cookies from both f
 
 1. Sell page to only show what stocks the users have in possession.
 2. API to fetch and load faster (display immediately what's already loaded) 
-3. To add a page for the history profile - stocks the user had bought or sold before.
+3. Get the stocks to show results in minutes, hours, days, months, years (user get to choose)
 4. Add a choice to sort the stocks in alphabetical order or add a search bar to search directly for the stocks you want to find.
 5. A complete Profile page allowing users to change password, e-mail adress or profile picture. 
 6. Add more questions in the registration page when users are creating their accounts. (D.O.B, gender, trading experience, trading risk, etc)
+7. Add news tab, to fetch news API according to the stocks the users are interested in.
 
 ### Screenshots of WIP
 
