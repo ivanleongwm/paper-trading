@@ -76,9 +76,9 @@ We used Figma to create a rough skeleton for our project's expected outcome : ht
 
 2. Create a wireframe using figma to draft out the visuals of the website. Wireframes bring clarity to your projects, allowing you to work through all the interactions and layout needs.
 
-3. Set up the project files and installed the necessary dependencies
+3. Set up the project files and installed the necessary dependencies\
    Front-end:
-   - CRA: npx create-react-app
+   - CRA: npx create-react-app\
    Back-end:
    - Express: npm i express
 
