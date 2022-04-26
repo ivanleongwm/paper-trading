@@ -30,7 +30,7 @@
 
 Paper Trade is a stock market simulator that reproduces behavior and features of a stock market, so that a user may practice trading stocks without financial risk. It allows an investor to buy and sell with live stock prices on paper before risking money in live markets. 
 
-### ⚙️ Technical Used
+### Technologies Used
 - React: CRA
 - MongoDB
 - Express
@@ -77,10 +77,10 @@ We used Figma to create a rough skeleton for our project's expected outcome : ht
 2. Create a wireframe using figma to draft out the visuals of the website. Wireframes bring clarity to your projects, allowing you to work through all the interactions and layout needs.
 
 3. Set up the project files and installed the necessary dependencies\
-   Front-end:
-   - CRA: npx create-react-app\
-   Back-end:
-   - Express: npm i express
+  
+   - Front-end: CRA - npx create-react-app
+  
+   - Back-end: Express - npm i express
 
 4. Create sample data after brainstorming what is needed for the website. Sample Data: https://docs.google.com/spreadsheets/d/1ubmwbCFKFeUePetwAlkxZ7F5RQH3LOSs2-ihzvQWuBQ/edit#gid=114795179
 
