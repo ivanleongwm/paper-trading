@@ -8,7 +8,7 @@ import axios from 'axios';
 import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
 
-export default function Sell() {
+export default function Sell({cashBalance, setCashBalance}) {
     const [stock, setStock] = useState([])
     const [nasdaq,setNasdaq] = useState("")
     const [secret, setSecret] = useState({
@@ -111,7 +111,7 @@ export default function Sell() {
             <div className="buy-container">
                 {
                     stock.map((x, i) => {
-                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} username={secret.user} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState}/>);
+                        return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} username={secret.user} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState} cashBalance={cashBalance} setCashBalance={setCashBalance}/>);
                       })
                 }
             </div>

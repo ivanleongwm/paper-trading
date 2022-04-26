@@ -81,6 +81,7 @@ function Form(props) {
     const stockDetails = { date, ticker, quantity, purchasePrice };
     sellStock(stockDetails);
     updateStockBalance(ticker,quantity)
+    props.setCashBalance(props.cashBalance + (Number(quantity) * Number(purchasePrice)))
   };
 
   // with the current date, today's price and quantity, username

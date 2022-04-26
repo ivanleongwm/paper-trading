@@ -4,7 +4,7 @@ import Form from '../Form/ControlledForm'
 import { useState , useEffect } from 'react';
 import productsArr from '../Form/products';
 
-export default function BuyStockCard ({stockHistoricalPrices, userAccountData,  secret,  setSecret, username,stockBalanceOriginalState,setStockBalanceOriginalState }) {
+export default function BuyStockCard ({stockHistoricalPrices, userAccountData,  secret,  setSecret, username,stockBalanceOriginalState,setStockBalanceOriginalState, cashBalance, setCashBalance }) {
 
     const [products, setProducts] = useState(productsArr);
     const [quantityHeld,setQuantityHeld] = useState(0)
@@ -40,7 +40,7 @@ export default function BuyStockCard ({stockHistoricalPrices, userAccountData,  
             <div className="mini-chart-container">
                 <MiniChart historicalPrices={stockHistoricalPrices.historical.slice(0,20)}/>
             </div>
-            <Form handleSubmit={handleSubmit} historicalPrices={stockHistoricalPrices} setQuantityHeld={setQuantityHeld} username={username} userAccountData={userAccountData} secret={secret} quantityHeld={quantityHeld} setQuantityHeld={setQuantityHeld} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState}/>
+            <Form handleSubmit={handleSubmit} historicalPrices={stockHistoricalPrices} username={username} userAccountData={userAccountData} secret={secret} quantityHeld={quantityHeld} setQuantityHeld={setQuantityHeld} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState} cashBalance={cashBalance} setCashBalance={setCashBalance}/>
         </div>
     )
 }
