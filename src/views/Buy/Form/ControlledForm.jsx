@@ -149,9 +149,9 @@ function Form(props) {
         </label>
         <div>Total Price: {(formData.price * props.historicalPrices.historical[0].close).toLocaleString('en', {useGrouping:true})}</div>
       {
-          (formData.price * props.historicalPrices.historical[0].close) < props.userAccountData.Ivan.balance ?
+          (formData.price * props.historicalPrices.historical[0].close) < props.cashBalance ?
           <input className="buy-button" type="submit" value="Buy" /> :
-          <div className="funds-exceeded">Insufficient Funds (Max:{(props.userAccountData.Ivan.balance).toLocaleString('en', {useGrouping:true})})</div>
+          <div className="funds-exceeded">Insufficient Funds (Max:{(props.cashBalance).toLocaleString('en', {useGrouping:true})})</div>
       }
         <p>{error}</p>
       </form>
