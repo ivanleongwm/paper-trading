@@ -54,9 +54,9 @@ We started off with wireframing and crafted a sheet of sample data to understand
 ###  User Stories
 
 Who are your users? : First-time traders or beginners who are looking into the trading world. Veteran traders could use them too, to test whether their trading strategies have merit. 
-&nbsp  
+&nbsp;  
 What do they want? : To practice trading. Develope trading experience as well as confidence and strategies at the same time. 
-&nbsp  
+&nbsp;  
 Why? : Because through the practice of buying and selling, users are able to gauge their performance without putting their capital at risk. Users will be able to gain experience on the entire trading process. When an indivisual paper trades successfully, it helps to build confidence to eventually conduct real trades. Users can also use paper trade to test whether a new trading strategy works without having to commit real money.
 
 
@@ -135,17 +135,17 @@ Another hurdle would be the login authorisation and sessions/cookies from both f
 ### Screenshots of WIP
 
 Portfolio/Home page of logged in user. Page will show the stocks the user is currently holding as well as the respective information in a pie-chart and line graph plotted according to the different stocks.
-&nbsp  
+&nbsp;  
 <img width="1440" alt="Screenshot 2022-04-26 at 4 11 27 PM" src="https://user-images.githubusercontent.com/94371596/165253840-051f3394-8fad-453a-8c9c-580b5e4e6bf2.png">
-&nbsp   
+&nbsp;   
 Buy page for the user to purchase stocks. Over 100 stocks to choose from. 
 <img width="1440" alt="Screenshot 2022-04-26 at 4 11 44 PM" src="https://user-images.githubusercontent.com/94371596/165253856-def47c21-82e7-4754-8c44-8c3717d06336.png">
-&nbsp  
+&nbsp;  
 Page to change the colour of the pie-chart. 
 <img width="1440" alt="Screenshot 2022-04-26 at 4 12 03 PM" src="https://user-images.githubusercontent.com/94371596/165253862-28f9a984-5c55-4cbb-837b-2a42b8f057ca.png">
-&nbsp  
+&nbsp;  
 Register page.
 <img width="1440" alt="Screenshot 2022-04-26 at 4 12 18 PM" src="https://user-images.githubusercontent.com/94371596/165253864-e537dd2f-fbd5-41e5-865f-73cec2034123.png">
-&nbsp  
+&nbsp;  
 MongoDB page of the back-end database.
 <img width="1189" alt="Screenshot 2022-04-26 at 4 12 47 PM" src="https://user-images.githubusercontent.com/94371596/165253865-b7112eba-42db-4bde-b6ee-fce79f5303bd.png">
