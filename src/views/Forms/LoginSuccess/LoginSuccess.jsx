@@ -3,9 +3,11 @@ import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
 
-const url = urlcat(BACKEND, "/api/users/loginsuccessful");
+
 
 function LoginSuccessful({secret,setSecret}) {
+  const url = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
+  console.log("SESSION USERNAME STORED",sessionStorage.getItem("username"))
   
   const loginSuccessCheck = () => {
     fetch(url, {
@@ -16,7 +18,7 @@ function LoginSuccessful({secret,setSecret}) {
       },
     })
       .then((response) => {
-          console.log(response)
+          console.log("RESPONSE TEST JESS",response)
         return response.json()
       })
       .then((data) => {

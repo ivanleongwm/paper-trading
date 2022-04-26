@@ -8,10 +8,12 @@ import { BACKEND } from "../../utils/utils";
 import axios from 'axios';
 import moment from 'moment'
 
-const url = urlcat(BACKEND, "/api/users/loginsuccessful");
+//const url = urlcat(BACKEND, "/api/users/loginsuccessful");
 
 export default function Portfolio() {
-    const [secret, setSecret] = useState({
+  const url = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
+    
+  const [secret, setSecret] = useState({
         user: "",
         purchaseLog:[],
         stockBalance: []

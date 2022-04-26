@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function PieChartColorsUpdate() {
-  const url1 = urlcat(BACKEND, "/api/users/loginsuccessful");
+  const url1 = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
 
   const [error, setError] = useState("");
   const [colour, setColour] = useState("");

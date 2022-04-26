@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 import { useNavigate } from "react-router-dom";
+import useAuth from '../Auth/useAuth';
+import AuthContext from '../Auth/AuthProvider';
 
 const url = urlcat(BACKEND, "/api/users/login");
 
@@ -11,6 +13,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isLogin, setLogin] = useState("Not Logged In");
   let navigate = useNavigate();
+  //const {setAuth} = useAuth();
 
   const loginIsSuccessful = (dataResponse) => {
     if (dataResponse == "Valid password") {
@@ -18,6 +21,7 @@ function Login() {
     }
   }
 
+  //const dataContext = useContext(AuthContext);
 // react frontend  
   const LoginAccount = (register) => {
     fetch(url, {
@@ -29,11 +33,14 @@ function Login() {
       body: JSON.stringify(register),
     })
       .then((response) => {
+        console.log("RESPONSE LOGIN JESS1",response)
         return response.json()
       })
       .then((data) => {
-        console.log(data)
+        console.log("DATA JESS1",data)
+        //setAuth({result:true})
         loginIsSuccessful(data.message)
+        sessionStorage.setItem("username",data.session.currentUser);
       })
       .catch((error) => console.log(error));
   };

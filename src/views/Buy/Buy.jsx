@@ -18,7 +18,7 @@ export default function Buy() {
         });
     const [stockBalanceOriginalState,setStockBalanceOriginalState] = useState([])
 
-    const url = urlcat(BACKEND, "/api/users/loginsuccessful");
+    const url = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
 
     const loginSuccessCheck = () => {
         fetch(url, {

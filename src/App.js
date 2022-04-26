@@ -18,6 +18,7 @@ function App() {
     user: "",
     purchaseLog:[]
   });
+  const [cookie, setCookie] = useState({})
 
   return (
     <BrowserRouter>
@@ -25,12 +26,12 @@ function App() {
         <header className="App-header">
           <HeaderBar />
           <Routes>
-            <Route path="/" element={<Portfolio />}/>
-            <Route path="/buy" element={<Buy secret={secret} setSecret={setSecret} />}/>
-            <Route path="/sell" element={<Sell secret={secret} setSecret={setSecret}/>}/>
-            <Route path="/loginsuccessful" element={<LoginSuccessful secret={secret} setSecret={setSecret} />}/>
+            <Route path="/" element={<Portfolio cookie={cookie} setCookie={setCookie} />}/>
+            <Route path="/buy" element={<Buy secret={secret} setSecret={setSecret} cookie={cookie} setCookie={setCookie} />}/>
+            <Route path="/sell" element={<Sell secret={secret} setSecret={setSecret} cookie={cookie} setCookie={setCookie}/>}/>
+            <Route path="/loginsuccessful" element={<LoginSuccessful secret={secret} setSecret={setSecret} cookie={cookie} setCookie={setCookie} />}/>
             <Route path="/register" element={<RegisterForm/>}/>
-            <Route path="/login" element={<LoginForm/>}/>
+            <Route path="/login" element={<LoginForm cookie={cookie} setCookie={setCookie}/>}/>
             <Route path="/display" element={<FormDataDisplay/>}/>
             <Route path="/piechart" element={<PieChartColorsUpdate/>}/>
           </Routes>

@@ -12,9 +12,9 @@ function Form(props) {
   const [ticker,setTicker] = useState(props.historicalPrices.symbol);
 
   // create a function that makes a post request when the buy button is clicked
-  const url = urlcat(BACKEND, `/api/holding/updatedPurchaseLog/${username}`);
-  const url2 = urlcat(BACKEND, "/api/users/loginsuccessful");
-  const url3 = urlcat(BACKEND, `/api/holding/updatedStockBalance/${username}`);
+  const url = urlcat(BACKEND, `/api/holding/updatedPurchaseLog/${sessionStorage.getItem("username")}`);
+  const url2 = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
+  const url3 = urlcat(BACKEND, `/api/holding/updatedStockBalance/${sessionStorage.getItem("username")}`);
 
   const buyStock = (stockDetails) => {
     fetch(url, {
