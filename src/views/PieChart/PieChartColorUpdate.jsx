@@ -78,6 +78,8 @@ function PieChartColorsUpdate() {
   return (
     <body>
       <h1>o</h1>
+      <h2>Change Pie Chart Colors:</h2>
+      <p>Enter colour1 to colour6, and specify color</p>
       <>
         <form onSubmit={handleSubmit}>
           Color: 
