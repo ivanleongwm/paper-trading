@@ -20,7 +20,7 @@
 }
 
 .loggedInUser {
-    font-size: 1.5vw;
+    font-size: 1.2vw;
     width:220px;
     padding-top:15px;
 }
@@ -46,4 +46,9 @@ a:hover {
     display:flex;
     text-decoration:none;
     color:yellow
+}
+
+.userDetails {
+    display:flex;
+    padding: 2px;
 }

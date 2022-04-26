@@ -24,6 +24,7 @@ function LoginSuccessful({secret,setSecret}) {
       .then((data) => {
         console.log("first data",data)
         setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
+        sessionStorage.setItem("cashBalance",data.cashBalance);
       })
       .catch((error) => console.log(error));
   };

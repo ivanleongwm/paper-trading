@@ -5,7 +5,12 @@ export default function HeaderBar() {
         <div className="headerContainer">
             <div className="fixedElement">
                 <div className="loggedInUser">
-                    Logged In User: {sessionStorage.getItem("username")}
+                    <div className="userDetails">
+                        Logged In: {sessionStorage.getItem("username")}
+                    </div>
+                    <div className="userDetails">
+                        Cash Balance: {sessionStorage.getItem("cashBalance")}
+                    </div>
                 </div>
                 <div className="title">
                     PAPER TRADE

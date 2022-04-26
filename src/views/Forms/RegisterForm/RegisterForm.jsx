@@ -2,7 +2,7 @@ import { useState } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
 
-const url = urlcat(BACKEND, "/api/users/register");
+
 
 function Register() {
   const [error, setError] = useState("");
@@ -11,8 +11,9 @@ function Register() {
   const [password, setPassword] = useState("");
 
   // const [cfmPassword, setCfmPassword] =  useState("")
-
+  
   const registerAccount = (register) => {
+    const url = urlcat(BACKEND, `/api/users/register/${username}`);
     fetch(url, {
       method: "POST",
       credentials: 'include',
