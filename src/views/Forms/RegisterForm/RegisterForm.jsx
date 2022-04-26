@@ -40,6 +40,7 @@ function Register() {
   return (
     <body>
       <h1>Welcome to Paper Trading</h1>
+      <h2>Register:</h2>
       <>
         <form onSubmit={handleSubmit}>
           Username:

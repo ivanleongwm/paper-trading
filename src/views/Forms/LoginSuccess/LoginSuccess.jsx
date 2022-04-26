@@ -36,11 +36,11 @@ function LoginSuccessful({secret,setSecret,setCashBalance}) {
 
   return (
     <body>
-      <h1>Login Successful</h1>
-      <h1>Login Successful: { secret.user }</h1>
-      <h1>stock holdings: {secret.purchaseLog.toString()}</h1>
+      <h1>o</h1>
+      <h1>Login Successful, Welcome { secret.user }!</h1>
     </body>
   );
 }
 
+//<h1>stock holdings: {secret.purchaseLog.toString()}</h1>
 export default LoginSuccessful;

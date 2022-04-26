@@ -8,6 +8,7 @@ import LoginForm from './views/Forms/LoginForm/LoginForm'
 import LoginSuccessful from './views/Forms/LoginSuccess/LoginSuccess';
 import FormDataDisplay from './views/Forms/FormDataDisplay/FormDataDisplay';
 import PieChartColorsUpdate from './views/PieChart/PieChartColorUpdate';
+import UserProfile from './views/User Profile/userProfile';
 import Buy from './views/Buy/Buy'
 import Sell from './views/Sell/Sell'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
@@ -34,6 +35,7 @@ function App() {
             <Route path="/login" element={<LoginForm/>}/>
             <Route path="/display" element={<FormDataDisplay/>}/>
             <Route path="/piechart" element={<PieChartColorsUpdate/>}/>
+            <Route path="/userprofile" element={<UserProfile/>}/>
           </Routes>
           <FooterBar />
         </header>

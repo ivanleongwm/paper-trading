@@ -9,7 +9,7 @@ export default function HeaderBar({cashBalance}) {
                         Logged In: {sessionStorage.getItem("username")}
                     </div>
                     <div className="userDetails">
-                        Cash Balance: {cashBalance}
+                        Cash Balance: {cashBalance.toFixed(2)}
                     </div>
                 </div>
                 <div className="title">

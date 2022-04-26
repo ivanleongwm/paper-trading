@@ -4,6 +4,8 @@ import portfolio from './Icons/portfolio.png'
 import buy from './Icons/buy.png'
 import sell from './Icons/sell.png'
 import piechart from './Icons/piechart.png'
+import user from './Icons/user.png'
+import userEvent from '@testing-library/user-event'
 
 const buttons = [
     {
@@ -22,9 +24,14 @@ const buttons = [
         link: '/sell'
     },
     {
-        name: 'Pie Chart',
+        name: 'Pie-chart',
         icon: piechart,
         link: '/piechart'
+    },
+    {
+        name: 'Profile',
+        icon: user,
+        link:'/userprofile'
     }
 ]
 

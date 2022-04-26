@@ -42,7 +42,10 @@ function Form(props) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({"stockBalance" : stockBalanceStateValue}),
+      body: JSON.stringify({
+        "stockBalance" : stockBalanceStateValue,
+        "cashBalance" : props.cashBalance + (Number(quantity) * Number(purchasePrice)),
+    }),
     })
       .then((response) => response.json())
       .then((data) => {

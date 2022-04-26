@@ -17,7 +17,12 @@ function Login() {
 
   const loginIsSuccessful = (dataResponse) => {
     if (dataResponse == "Valid password") {
-      navigate("/loginsuccessful");
+      setTimeout(()=> {
+        navigate("/loginsuccessful");
+       }, 1000);
+      setTimeout(()=> {
+        navigate("/");
+      }, 2000);
     }
   }
 
@@ -38,9 +43,10 @@ function Login() {
       })
       .then((data) => {
         console.log("DATA JESS1",data)
+        console.log("DATA USERNAME",username)
         //setAuth({result:true})
         loginIsSuccessful(data.message)
-        sessionStorage.setItem("username",data.session.currentUser);
+        sessionStorage.setItem("username",username);
       })
       .catch((error) => console.log(error));
   };
@@ -53,7 +59,8 @@ function Login() {
 
   return (
     <body>
-      <h1>Welcome to Paper Trading</h1>
+      <h1>o</h1>
+      <h2>Login</h2>
       <>
         <form onSubmit={handleSubmit}>
           Username:

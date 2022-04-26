@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function PieChartColorsUpdate() {
+function UserProfile() {
   const url1 = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
 
   const [error, setError] = useState("");
@@ -49,15 +49,14 @@ function PieChartColorsUpdate() {
   }
 
 // react frontend  
-  const LoginAccount = (register) => {
-    const url = urlcat(BACKEND, `/api/piechart/${secret.user}`);
+  const DeleteAccount = (register) => {
+    const url = urlcat(BACKEND, `/api/users/${secret.user}`);
     fetch(url, {
-      method: "PUT",
+      method: "DELETE",
       credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({[colour]:hexColourCode}),
     })
       .then((response) => {
         return response.json()
@@ -71,38 +70,20 @@ function PieChartColorsUpdate() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const login = { colour, hexColourCode };
-    LoginAccount(login);
+    DeleteAccount();
   };
 
   return (
     <body>
       <h1>o</h1>
+      <div>User: {secret.user}</div>
       <>
         <form onSubmit={handleSubmit}>
-          Color: 
-          <input
-            type="text"
-            name="username"
-            value={colour}
-            onChange={(event) => setColour(event.target.value)}
-          />
-          <br />
-          <br />
-          HexaDecimal Code: 
-          <input
-            type="text"
-            name="email"
-            value={hexColourCode}
-            onChange={(event) => setHexColourCode(event.target.value)}
-          />
-          <p>{error}</p>
-          <br />
-          <button>Change Color Code</button>
+          <button>Delete User Account</button>
         </form>
       </>
     </body>
   );
 }
 
-export default PieChartColorsUpdate;
+export default UserProfile;
