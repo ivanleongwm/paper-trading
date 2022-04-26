@@ -31,11 +31,11 @@ function App() {
             <Route path="/buy" element={<Buy secret={secret} setSecret={setSecret} cashBalance={cashBalance} setCashBalance={setCashBalance} />}/>
             <Route path="/sell" element={<Sell secret={secret} setSecret={setSecret} cashBalance={cashBalance} setCashBalance={setCashBalance}/>}/>
             <Route path="/loginsuccessful" element={<LoginSuccessful secret={secret} setSecret={setSecret} cashBalance={cashBalance} setCashBalance={setCashBalance}/>}/>
-            <Route path="/register" element={<RegisterForm/>}/>
-            <Route path="/login" element={<LoginForm/>}/>
+            <Route path="/register" element={<RegisterForm cashBalance={cashBalance} setCashBalance={setCashBalance} />}/>
+            <Route path="/login" element={<LoginForm cashBalance={cashBalance} setCashBalance={setCashBalance} />}/>
             <Route path="/display" element={<FormDataDisplay/>}/>
             <Route path="/piechart" element={<PieChartColorsUpdate/>}/>
-            <Route path="/userprofile" element={<UserProfile/>}/>
+            <Route path="/userprofile" element={<UserProfile  cashBalance={cashBalance} setCashBalance={setCashBalance} />}/>
           </Routes>
           <FooterBar />
         </header>

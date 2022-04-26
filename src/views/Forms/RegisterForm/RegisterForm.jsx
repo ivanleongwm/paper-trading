@@ -1,7 +1,7 @@
 import { useState } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../../utils/utils";
-
+import {useNavigate} from 'react-router-dom'
 
 
 function Register() {
@@ -11,7 +11,8 @@ function Register() {
   const [password, setPassword] = useState("");
 
   // const [cfmPassword, setCfmPassword] =  useState("")
-  
+  let navigate = useNavigate();
+
   const registerAccount = (register) => {
     const url = urlcat(BACKEND, `/api/users/register/${username}`);
     fetch(url, {
@@ -35,11 +36,14 @@ function Register() {
     event.preventDefault();
     const register = { username, email, password };
     registerAccount(register);
+    setTimeout(()=> {
+      navigate("/login");
+     }, 1000);
   };
 
   return (
     <body>
-      <h1>Welcome to Paper Trading</h1>
+      <h1>o</h1>
       <h2>Register:</h2>
       <>
         <form onSubmit={handleSubmit}>

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function UserProfile() {
+function UserProfile({setCashBalance}) {
   const url1 = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
 
   const [error, setError] = useState("");
@@ -63,7 +63,12 @@ function UserProfile() {
       })
       .then((data) => {
         console.log(data)
-        loginIsSuccessful(data.message)
+        setTimeout(()=> {
+          setCashBalance(0.00);
+          sessionStorage.removeItem("username");
+          navigate("/login");
+         }, 1000);
+        //loginIsSuccessful(data.message)
       })
       .catch((error) => console.log(error));
   };

@@ -124,9 +124,10 @@ export default function Portfolio() {
 
          
           for (let i = 0; i < historicalPrices.length; i++) {
+            console.log("PIE CHART VALUE",historicalPrices[i].historical[0].close * stocksHeld[historicalPrices[i].symbol])
             pieChartData.push({
                 name: historicalPrices[i].symbol,
-                value: historicalPrices[i].historical[0].close * stocksHeld[historicalPrices[i].symbol],
+                value: (Math.round(historicalPrices[i].historical[0].close * stocksHeld[historicalPrices[i].symbol])),
                 fill: coloursState[i]
             })    
           }
