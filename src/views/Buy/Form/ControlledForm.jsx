@@ -103,6 +103,9 @@ function Form(props) {
     event.preventDefault();
     console.log("form submitted!")
     const stockDetails = { date, ticker, quantity, purchasePrice };
+    console.log("Session storage in buy",sessionStorage.getItem("cashBalance"),"quantity",Number(quantity),"Purchase price",Number(purchasePrice))
+    //sessionStorage.setItem("cashBalance",sessionStorage.getItem("cashBalance") - (Number(quantity) * Number(purchasePrice)));
+    props.setCashBalance(props.cashBalance - (Number(quantity) * Number(purchasePrice)))
     buyStock(stockDetails);
     console.log('ticker',ticker)
     updateStockBalance(ticker,quantity)

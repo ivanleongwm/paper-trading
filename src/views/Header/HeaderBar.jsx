@@ -1,6 +1,6 @@
 import './HeaderBar.css'
 
-export default function HeaderBar() {
+export default function HeaderBar({cashBalance}) {
     return (
         <div className="headerContainer">
             <div className="fixedElement">
@@ -9,7 +9,7 @@ export default function HeaderBar() {
                         Logged In: {sessionStorage.getItem("username")}
                     </div>
                     <div className="userDetails">
-                        Cash Balance: {sessionStorage.getItem("cashBalance")}
+                        Cash Balance: {cashBalance}
                     </div>
                 </div>
                 <div className="title">

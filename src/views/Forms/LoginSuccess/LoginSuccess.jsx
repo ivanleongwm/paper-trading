@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function LoginSuccessful({secret,setSecret}) {
+function LoginSuccessful({secret,setSecret,setCashBalance}) {
   const url = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
   console.log("SESSION USERNAME STORED",sessionStorage.getItem("username"))
   
@@ -24,7 +24,7 @@ function LoginSuccessful({secret,setSecret}) {
       .then((data) => {
         console.log("first data",data)
         setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
-        sessionStorage.setItem("cashBalance",data.cashBalance);
+        setCashBalance(data.cashBalance)
       })
       .catch((error) => console.log(error));
   };
