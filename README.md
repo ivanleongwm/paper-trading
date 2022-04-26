@@ -84,7 +84,7 @@ We used Figma to create a rough skeleton for our project's expected outcome : ht
 
 4. Create sample data after brainstorming what is needed for the website. Sample Data: https://docs.google.com/spreadsheets/d/1ubmwbCFKFeUePetwAlkxZ7F5RQH3LOSs2-ihzvQWuBQ/edit#gid=114795179
 
-5. Front-end: Do up all the necessary routes and create needed components and link them up. Apply basic CSS from imported library. 
+5. Front-end: Do up all the necessary routes and create needed components and link them up. Design website with simple and classic CSS. Import font from google fonts.
 
 6. Test deploy front-end to Vercel, and back-end to Heroku. 
 
@@ -104,15 +104,17 @@ We used Figma to create a rough skeleton for our project's expected outcome : ht
 
 **Week 3**
 
-1. Front-end: Complete the buy and sell stocks pages and the javascript logic.  
+1. Front-end: Complete the buy and sell stocks pages and the javascript logic. Set stock balance to a certain amount (10,000) and adjust the maximum number of stocks available for purchase.  
 
 2. Front-end: Javascript logic with the cash balance and stock balance information and get it to work on the back-end too. Create the delete button to delete the user account and their respective stock holdings assets.
 
-3. Back-end: Create Update and Delete routes for nessasary controllers. 
+3. Back-end: Create Update and Delete routes for nessasary controllers. Link all the routes to server.js
 
 4. Do up a new model that allows users to change the colour of the pie chart. Worked on both front-end and back-end to get this up.
 
-5. Complete this read-me page.
+5. Create logout route for front-end. Link and redirect every piece together.
+
+6. Complete this read-me page.
 
 
 
@@ -130,7 +132,6 @@ Another hurdle would be the login authorisation and sessions/cookies from both f
 4. Add a choice to sort the stocks in alphabetical order or add a search bar to search directly for the stocks you want to find.
 5. A complete Profile page allowing users to change password, e-mail adress or profile picture. 
 6. Add more questions in the registration page when users are creating their accounts. (D.O.B, gender, trading experience, trading risk, etc)
-7. Logout
 
 ### Screenshots of WIP
 
