@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
+import './userProfile.css'
 
 
 
@@ -18,6 +19,9 @@ function UserProfile({setCashBalance}) {
     stockBalance:[]
   });
   let navigate = useNavigate();
+  const [purchaseLog,setPurchaseLog] = useState([
+  ]);
+  const [salesLog, setSalesLog] = useState([])
 
   const loginSuccessCheck = () => {
     fetch(url1, {
@@ -33,6 +37,8 @@ function UserProfile({setCashBalance}) {
       })
       .then((data) => {
         console.log("first data",data)
+        setPurchaseLog(data.purchaseLog)
+        setSalesLog(data.salesLog)
         setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance })
         })
       .catch((error) => console.log(error));
@@ -87,6 +93,41 @@ function UserProfile({setCashBalance}) {
           <button>Delete User Account</button>
         </form>
       </>
+      <br></br>
+      <h4>Purchase Log</h4>
+      <table>
+        <tr key={"header1"}>
+          <th>Date</th>
+          <th>Ticker</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>ID</th>
+        </tr>
+        {purchaseLog.map((item) => (
+          <tr key={item.id}>
+            {Object.values(item).map((val) => (
+              <td>{val}</td>
+            ))}
+          </tr>
+        ))}
+      </table>
+      <h4>Sales Log</h4>
+      <table>
+        <tr key={"header1"}>
+          <th>Date</th>
+          <th>Ticker</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>ID</th>
+        </tr>
+        {salesLog.map((item) => (
+          <tr key={item.id}>
+            {Object.values(item).map((val) => (
+              <td>{val}</td>
+            ))}
+          </tr>
+        ))}
+      </table>
     </body>
   );
 }
