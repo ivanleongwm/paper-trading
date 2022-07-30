@@ -12,7 +12,9 @@ import UserProfile from './views/User Profile/userProfile';
 import Buy from './views/Buy/Buy'
 import Sell from './views/Sell/Sell'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+
+
 
 function App() {
   const [secret, setSecret] = useState({

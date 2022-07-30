@@ -99,6 +99,7 @@ export default function Sell({cashBalance, setCashBalance}) {
             cleanedStockResults.sort( compare );
             console.log("cleaned sorted stock list",cleanedStockResults)
             setStock(cleanedStockResults)
+            document.querySelector('.loader').classList.add('hide-loader');
         }
         mainCompanyStockCall()
       },[nasdaq])
@@ -109,6 +110,7 @@ export default function Sell({cashBalance, setCashBalance}) {
         <div>
             <TopSpacer />
             <div className="buy-container">
+            <div class="loader" id="loader"></div>
                 {
                     stock.map((x, i) => {
                         return (<SellStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} username={secret.user} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState} cashBalance={cashBalance} setCashBalance={setCashBalance}/>);

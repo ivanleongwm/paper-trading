@@ -7,14 +7,12 @@ import urlcat from "urlcat";
 import { BACKEND } from "../../utils/utils";
 import axios from 'axios';
 import moment from 'moment'
-
-//const url = urlcat(BACKEND, "/api/users/loginsuccessful");
+import fetchData from '../fetch';
 
 export default function Portfolio() {
-  const url = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
-    
+  
   const [secret, setSecret] = useState({
-        user: "",
+        username: "",
         purchaseLog:[],
         stockBalance: []
       });
@@ -25,93 +23,62 @@ export default function Portfolio() {
     const [mainLineGraphData,setMainLineGraphData] = useState([])
     const [colours,setColours] = useState({})
     const [coloursState,setColoursState] = useState(['#ADD8E6','#9cacf1','#8dd1e1','#82ca9d','#a4de6c','#d0ed57'])
-
-      const loginSuccessCheck = () => {
-        fetch(url, {
-          method: "GET",
-          credentials: 'include',
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-              console.log(response)
-            return response.json()
-          })
-          .then((data) => {
-            console.log(data)
-            setSecret({ ...secret, user: data.username, purchaseLog: data.purchaseLog, stockBalance: data.stockBalance})
-          })
-          .catch((error) => console.log(error));
-      };
     
-      useEffect(() => {
-          // retrieve stockholdings data for user
-        loginSuccessCheck()
-      },[])
+    // First UseEffect call
+    useEffect(() => {
+      // checks for login success and retrieves data for user
+      const url = urlcat(BACKEND, `/api/users/loginsuccessful/${sessionStorage.getItem("username")}`);
+      fetchData(url, "GET",undefined,undefined,setSecret)
+    },[])
 
-      const fetchColours = () => {
-        const url2 = urlcat(BACKEND, `/api/piechart/colours/${secret.user}`);
-        fetch(url2, {
-          method: "GET",
-          credentials: 'include',
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-              console.log(response)
-            return response.json()
-          })
-          .then((data) => {
-            console.log("first data colours",data)
-            setColours(data)
-        })
-          .catch((error) => console.log(error));
-      };
+    // Second A UseEffect call
+    useEffect(()=>{
+      //fetches colors based on username
+      const url2 = urlcat(BACKEND, `/api/piechart/colours/${secret.username}`);
+      fetchData(url2, "GET",undefined,undefined,setColours)
+    },[secret])
 
-      useEffect(()=>{
-        fetchColours()
-        console.log("SECRET AFTER FIRST USEEFFECT",secret)
-      },[secret])
+    // Second B UseEffect call
+    useEffect(()=> {
+      // retrieve the tickers held by user
+      const internalSetTickers = {}
+      for (const stock of secret.stockBalance) {
+          internalSetTickers[stock.ticker] = stock.quantity
+      }
+      setTickers(internalSetTickers)
+    },[secret])
 
-      useEffect(()=> {
-        console.log("SECOND COLOR",colours.colour2)
-        setColoursState([colours.colour1,colours.colour2,colours.colour3,colours.colour4,colours.colour5,colours.colour6])
-      },[colours])
+    // Third UseEffect call
+    useEffect(()=> {
+      // set colors state used by pie charts
+      setColoursState([colours.colour1,colours.colour2,colours.colour3,colours.colour4,colours.colour5,colours.colour6])
+    },[colours])
 
-      useEffect(()=> {
-        // retrieve the tickers held by user
-        const internalSetTickers = {}
-        for (const stock of secret.stockBalance) {
-            internalSetTickers[stock.ticker] = stock.quantity
-        }
-        setTickers(internalSetTickers)
-      },[secret])
 
-      useEffect(()=> {
-          // retrieve historical stock prices for tickers
-          const stockPromises = []
-          const stockResults = []
+    useEffect(()=> {
+        // retrieve historical stock prices for tickers
+        const stockPromises = []
+        const stockResults = []
 
-          const stockTickerCalls = async () => {
-              console.log("tickers",tickers)
-            for (const ticker of Object.keys(tickers)) {
-                stockPromises.push(
-                    axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${ticker}?apikey=ed422f5ab8a52bef7a04a8d39de5129d`)
-                    )
-              }
-    
-              const stockResponses = await Promise.allSettled(stockPromises)
-    
-              stockResponses.forEach((resp,index) => {
-                stockResults.push(resp.value.data)
-              })
-              console.log("resolved api calls",stockResults)
-              setHistoricalStockPrices(stockResults)
+        const stockTickerCalls = async () => {
+            console.log("tickers",tickers)
+          for (const ticker of Object.keys(tickers)) {
+              stockPromises.push(
+                  axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${ticker}?apikey=ed422f5ab8a52bef7a04a8d39de5129d`)
+                  )
             }
-          stockTickerCalls()
-      },[tickers])
+  
+            const stockResponses = await Promise.allSettled(stockPromises)
+  
+            stockResponses.forEach((resp,index) => {
+              stockResults.push(resp.value.data)
+            })
+            console.log("resolved api calls",stockResults)
+            setHistoricalStockPrices(stockResults)
+            
+          }
+        stockTickerCalls()
+    },[tickers])
 
       const retrievePieChartDetails = () => {
           const stocksHeld = tickers
@@ -134,6 +101,7 @@ export default function Portfolio() {
           
           setPieChartData(pieChartData)
           console.log("piechart data",pieChartData)
+          
       }
      
       const retrieveMainLineChartDetails = () => {
@@ -162,9 +130,6 @@ export default function Portfolio() {
         console.log("aggregatedPastSevenDays", pastSevenDays)
         const aggregatedByStocksPastSevenDays = pastSevenDays
         setAggregatedByStocksPastSevenDays(aggregatedByStocksPastSevenDays)
-        /*
-        
-        */
     }
 
         
@@ -194,18 +159,21 @@ export default function Portfolio() {
             }
         console.log("aggregatedFinal",aggregatedStocks)
         }
-        setMainLineGraphData(aggregatedStocks.reverse())         
+        setMainLineGraphData(aggregatedStocks.reverse())     
+            
       },[aggregatedByStocksPastSevenDays])
 
       useEffect(()=> {
         if (mainLineGraphData.length > 0) {
             console.log("main line graph data", mainLineGraphData)
         }
+       
       },[mainLineGraphData])
 
     return (
         <div>
             <TopSpacer/>
+            <div class="loader" id="loader"></div>
             <div className="chart-container">
                 <PieChart pieChartData={pieChartData}/>
                 <Tabs mainLineGraphData={mainLineGraphData} individualLineGraphData={aggregatedByStocksPastSevenDays}/>

@@ -69,7 +69,7 @@ export default function Buy({cashBalance, setCashBalance}) {
             
             for (let i = 0; i < 10; i++) {
                 stockPromises.push(
-                    axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${nasdaq.slice(1*i*5,5+i*5).join(",")}?apikey=ed422f5ab8a52bef7a04a8d39de5129d`)
+                    axios.get(`https://financialmodelingprep.com/api/v3/historical-price-full/${nasdaq.slice(1*i*5,5+i*5).join(",")}?from=2022-07-12&to=2022-07-22&apikey=ed422f5ab8a52bef7a04a8d39de5129d`)
                 )
               }
 
@@ -100,6 +100,7 @@ export default function Buy({cashBalance, setCashBalance}) {
             cleanedStockResults.sort( compare );
             console.log("cleaned sorted stock list",cleanedStockResults)
             setStock(cleanedStockResults)
+            document.querySelector('.loader').classList.add('hide-loader');
         }
         mainCompanyStockCall()
       },[nasdaq])
@@ -110,9 +111,12 @@ export default function Buy({cashBalance, setCashBalance}) {
         <div>
             <TopSpacer />
             <div className="buy-container">
+                <div class="loader" id="loader"></div>
                 {
+                  
                     stock.map((x, i) => {
-                        return (<BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret.user} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState} cashBalance={cashBalance} setCashBalance={setCashBalance}/>);
+                        return (
+                        <BuyStockCard stockHistoricalPrices={stock[i]} userAccountData={userAccountData} secret={secret} setSecret={setSecret} username={secret.user} stockBalanceOriginalState={stockBalanceOriginalState} setStockBalanceOriginalState={setStockBalanceOriginalState} cashBalance={cashBalance} setCashBalance={setCashBalance}/>);
                       })
                 }
             </div>
